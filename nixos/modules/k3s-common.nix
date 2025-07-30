@@ -85,11 +85,15 @@
   age.secrets.k3s-token = {
     file = ../secrets/k3s-token.age;
     path = "/etc/k3s-token";
+    owner = "root";
+    mode = "0400";
   };
 
   age.secrets.k3s-url = {
     file = ../secrets/k3s-url.age;
     path = "/etc/k3s-url";
+    owner = "root";
+    mode = "0400";
   };
 
   /* ########################################################################## */
@@ -98,10 +102,9 @@
 
   /* ################################### K3S ################################## */
   environment.variables = {
-    K3S_TOKEN = builtins.readFile /etc/k3s-token;
-    K3S_URL = builtins.readFile /etc/k3s-url;
+    K3S_TOKEN = "@/etc/k3s-token";
+    K3S_URL = "@/etc/k3s-url";
   };
-
 
 
   /* ########################################################################## */
@@ -109,5 +112,16 @@
   /* ########################################################################## */
 
   /* ################################### K3S ################################## */
-
+  services.k3s = {
+    enable = true;
+    role = "agent";
+    tokenFile = "/etc/k3s-token";  
+    serverAddr = "https://192.168.0.251:6443";
+  };
+  # systemd.services.k3s-agent = {
+  #   environment = {
+  #     K3S_TOKEN = "@/etc/k3s-token";
+  #     K3S_URL = "@/etc/k3s-url";
+  #   };
+  # };
 }

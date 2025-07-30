@@ -17,3 +17,9 @@
 
 ## Software
 - nodes managed via nix flakes deployed via linux server - see deploy.sh inside of /repo/nixos/deploy.sh
+
+
+
+# TO DO
+- internal network https
+- check out multi-region kubernetes setup
