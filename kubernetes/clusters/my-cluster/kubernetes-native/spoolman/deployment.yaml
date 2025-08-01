@@ -14,10 +14,10 @@ spec:
     metadata:
       labels:
         app: spoolman
-  spec:
-    containers:
-    - name: spoolman
-      image: ghcr.io/donkie/spoolman:latest
-      ports:
-      - containerPort: 8000
-        name: spoolman-cport
+    spec:
+      containers:
+      - name: spoolman
+        image: ghcr.io/donkie/spoolman:latest
+        ports:
+        - containerPort: 8000
+          name: spoolman-cport
