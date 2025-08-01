@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: spoolman-deployment
+  namespace: spoolman
   labels:
     app: spoolman
 spec:
