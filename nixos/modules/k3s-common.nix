@@ -7,6 +7,7 @@
     curl
     htop
     age
+    dig
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -47,10 +48,14 @@
 
   nix.settings.auto-optimise-store = true;
 
-# ################################### PORTS ################################## #
+/* ############################### NETWORKING ############################### */
   # needed for k3s setup
-  networking.firewall.allowedTCPPorts = [ 22 6443 10250 ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [ 22 6443 10250 53 ];
+  networking.firewall.allowedUDPPorts = [ 53 8472 ];
+  #networking.nat.enable = true;
+  #networking.nat.internalInterfaces = [ "cni0" ];
+  services.resolved.enable = false;
+  networking.nameservers = [ "1.1.1.1" "8.8.8.8" ];
 
   # Install firefox.
   programs.firefox.enable = true;
