@@ -20,4 +20,4 @@ spec:
       image: ghcr.io/donkie/spoolman:latest
       ports:
       - containerPort: 8000
-        name: spoolman-container-port
+        name: spoolman-cport
