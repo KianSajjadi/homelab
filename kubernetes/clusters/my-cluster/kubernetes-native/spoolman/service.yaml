@@ -9,4 +9,4 @@ spec:
   ports:
     - protocol: TCP
       port: 7912
-      targetPort: spoolman-cport
+      targetPort: 8000
