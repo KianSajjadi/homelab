@@ -4,4 +4,3 @@ resources:
 - gotk-components.yaml
 - gotk-sync.yaml
 - ../kubernetes-native/spoolman/spoolman-kustomization.yaml
-- ../kubernetes-native/ingress-nginx/nginx-kustomization.yaml
