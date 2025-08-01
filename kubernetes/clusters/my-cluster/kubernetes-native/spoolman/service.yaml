@@ -5,7 +5,7 @@ metadata:
   namespace: spoolman
 spec:
   selector:
-    app.kubernetes.io/name: spoolman
+    app: spoolman
   ports:
     - protocol: TCP
       port: 7912
