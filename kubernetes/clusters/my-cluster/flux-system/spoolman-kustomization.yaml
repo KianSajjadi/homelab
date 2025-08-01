@@ -5,9 +5,10 @@ metadata:
   namespace: flux-system
 spec:
   interval: 1m
+  targetNamespace: spoolman
   path: ./clusters/my-cluster/kubernetes-native/spoolman
   prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
-    namespace: flux-system  
+    namespace: flux-system
