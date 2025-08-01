@@ -4,9 +4,9 @@ metadata:
   name: spoolman-ingress
   namespace: spoolman
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    traefik.ingress.kubernetes.io/router.entrypoints: web
 spec:
-  ingressClassName: nginx
+  ingressClassName: traefik
   rules:
   - host: spoolman.local
     http:
