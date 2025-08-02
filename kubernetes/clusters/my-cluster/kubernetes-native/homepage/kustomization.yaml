@@ -6,3 +6,4 @@ resources:
 - secret.yaml
 - service-account.yaml
 - service.yaml
+- namespace.yaml
