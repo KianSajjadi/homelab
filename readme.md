@@ -35,6 +35,8 @@ This is a homelab for experimenting with linux and kubernetes. The two node mach
 # TO DO
 - internal network https
 - check out multi-region kubernetes control plane setup
-- install kustomize and helm on nodes
+- install ~~kustomize~~ and helm on nodes
 - github actions self hosted runner
 - consider gitea
+- add homepage
+- 

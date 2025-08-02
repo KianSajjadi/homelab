@@ -8,7 +8,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-  - host: spoolman.local
+  - host: spoolman.lan
     http:
       paths:
       - path: /
