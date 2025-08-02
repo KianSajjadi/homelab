@@ -4,3 +4,4 @@ resources:
 - gotk-components.yaml
 - gotk-sync.yaml
 - ../kubernetes-native/spoolman/spoolman-kustomization.yaml
+- ../kubernetes-native/homepage/homepage-kustomization.yaml
