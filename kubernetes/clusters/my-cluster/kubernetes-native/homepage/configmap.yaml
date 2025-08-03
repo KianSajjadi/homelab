@@ -22,10 +22,14 @@ data:
               href: https://github.com/
   services.yaml: |
     - My First Group:
-        - widget:
-            type: pihole
-            url: 192.168.0.251
-            version: 6
+        - PiHole:
+            icon: pihole.png
+            server: 192.168.0.251
+            container: pihole
+            widgets:
+                type: pihole
+                url: 192.168.0.251
+                version: 6
     - My Second Group:
         - My Second Service:
             href: http://localhost/
