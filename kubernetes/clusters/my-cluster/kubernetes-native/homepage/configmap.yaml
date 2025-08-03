@@ -54,6 +54,10 @@ data:
         cpu: true
         memory: true
         network: default
+    - PiHole
+      type: pihole
+      url: 192.168.0.251
+      version: 6
     - search:
         provider: duckduckgo
         target: _blank
