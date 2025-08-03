@@ -40,6 +40,9 @@ data:
         cpu: true
         memory: true
         network: default
+    - pihole:
+        url: http://pihole.lan/admin
+        token: "{{HOMEPAGE_VAR_PIHOLE_TOKEN}}"
     - search:
         provider: duckduckgo
         target: _blank
