@@ -9,4 +9,5 @@ in
 {
   "k3s-token.age".publicKeys = users ++ systems;
   "k3s-url.age".publicKeys = users ++ systems;
+  "pihole-token.age".publicKeys = users ++ systems;
 }

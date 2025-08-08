@@ -38,5 +38,6 @@ This is a homelab for experimenting with linux and kubernetes. The two node mach
 - install ~~kustomize~~ and helm on nodes
 - github actions self hosted runner
 - consider gitea
-- add homepage
+- ~~add homepage~~
 - add traefik-config for 80->8081 443 -> 8444 and manage all routes via nix
+- add prometheus
