@@ -15,8 +15,17 @@ creation_rules:
           - *node_0
           - *node_1
 
-  # Kubernetes secrets
+  # ############################ Kubernetes Secrets ############################ #
+  # ########################### spoolman db password ########################### #
   - path_regex: ^kubernetes/.*/spoolman/[^/]+\.ya?ml$
+    encrypted_regex: '^(data|stringData)$'
+    key_groups:
+      - age:
+          - *node_0
+          - *node_1
+
+  # ########################### homepage pihole token ########################## #
+  - path_regex: ^kubernetes/.*/homepage/[^/]+\.ya?ml$
     encrypted_regex: '^(data|stringData)$'
     key_groups:
       - age:
