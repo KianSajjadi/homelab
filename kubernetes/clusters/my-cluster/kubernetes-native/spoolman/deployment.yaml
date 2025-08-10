@@ -18,6 +18,13 @@ spec:
       containers:
       - name: spoolman
         image: ghcr.io/donkie/spoolman:latest
+        resources:
+          requests:
+            memory: "200Mi"
+            cpu: "50m"
+          limit:
+            memory: "500Mi"
+            cpu: "250m"
         ports:
         - containerPort: 8000
           name: spoolman-cport

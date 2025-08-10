@@ -8,6 +8,7 @@
     htop
     age
     dig
+    sops
   ];
 
   boot.loader.systemd-boot.enable = true;

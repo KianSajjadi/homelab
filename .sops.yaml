@@ -1,0 +1,24 @@
+keys:
+  - &kian_wsl     age1hm46de9enhwh4qlz84s2th5lxpqfwz3sudjc9luk2tpyctaws39qa9r5tg
+  - &linux_server age18mtfggrtjdmxq6yj2qhdhfmh3f080qtvk24k5hqah6v8fpvjeyyqujh9rf
+  - &node_0       age152vcpkz7zrwsgl6cyrtd3hdqy2v3vd9q8k9pcek273uut8yfmscs7e0d9c
+  - &node_1       age1ytdrgftak8algavc3se8h0vqzz6wuvq0mlqch4h9lgfnugcuh9zqxadurx
+
+creation_rules:
+  # NixOS secrets
+  - path_regex: ^nixos/secrets/[^/]+\.(ya?ml|json|env|ini|txt)$
+    encrypted_regex: '^(data|stringData)$'
+    key_groups:
+      - age:
+          - *kian_wsl
+          - *linux_server
+          - *node_0
+          - *node_1
+
+  # Kubernetes secrets
+  - path_regex: ^kubernetes/.*/spoolman/[^/]+\.ya?ml$
+    encrypted_regex: '^(data|stringData)$'
+    key_groups:
+      - age:
+          - *node_0
+          - *node_1

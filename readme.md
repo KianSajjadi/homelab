@@ -4,10 +4,8 @@
 This is a homelab for experimenting with linux and kubernetes. The two node machines are running [NixOS](https://nixos.org/) which are managed via [Nix Flakes](https://nixos.wiki/wiki/Flakes) in the nixos [directory](nixos/).
 
 [K3S](https://k3s.io) is installed on the linux-server as the control plane. \
-[agenix](https://github.com/ryantm/agenix) is used for encrypting all secrets with the ssh keys. \
+[agenix](https://github.com/ryantm/agenix) and [sops]() are used for encrypting all secrets with the ssh keys. \
 [Kubernetes](https://kubernetes.io/) manifests exist in both raw kubernetes templates and helm charts - to increase familiarity with both \
-
-
 
 ### Hardware
 - Linux server
@@ -29,6 +27,7 @@ This is a homelab for experimenting with linux and kubernetes. The two node mach
 - Kubernetes
 - Grafana
 - Spoolman
+- Homepage
 
 
 
@@ -39,5 +38,9 @@ This is a homelab for experimenting with linux and kubernetes. The two node mach
 - github actions self hosted runner
 - consider gitea
 - ~~add homepage~~
-- add traefik-config for 80->8081 443 -> 8444 and manage all routes via nix
+- ~~add traefik-config for 80->8081 443 -> 8444 and manage all routes via nix~~
 - add prometheus
+- add SOPS-nix
+- make spoolman use postgres and change spoolman deployment to stateful set
+- use k3s inbuilt volume management
+- add pipeline for building kubernetes for secrets

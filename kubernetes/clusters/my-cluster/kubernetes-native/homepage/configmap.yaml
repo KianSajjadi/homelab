@@ -20,7 +20,8 @@ data:
         - Github:
             - abbr: GH
               href: https://github.com/
-  services.yaml:
+  services.yaml: |
+
   widgets.yaml: |
     - kubernetes:
         cluster:
