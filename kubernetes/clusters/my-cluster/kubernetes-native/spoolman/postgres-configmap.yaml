@@ -6,5 +6,5 @@ metadata:
   labels:
     app: postgres
 data:
-  POSTGRES_DB: pg_db
-  POSTGRES_USER: pg_user
+  POSTGRES_DB: postgres
+  POSTGRES_USER: postgres
