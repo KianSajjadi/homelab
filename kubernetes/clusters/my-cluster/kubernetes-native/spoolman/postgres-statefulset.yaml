@@ -31,9 +31,13 @@ spec:
                 name: postgres-secret
                 key: POSTGRES_PASSWORD
         volumeMounts:
-        - name: postgres-data
+        - name: pgdata
           mountPath: /var/lib/postgresql/data
-      volumes:
-      - name: postgres-data
-        perstistentVolumeClaim:
-          claimName: postgres-pvc
+      volumeClaimTemplates:
+        - metadata:
+            name: pgdata
+          spec:
+            accessModes: ["ReadWriteOnce"]
+            resources:
+              requests:
+                storage: "1Gi"
