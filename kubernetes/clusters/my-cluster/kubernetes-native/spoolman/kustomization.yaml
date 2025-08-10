@@ -8,6 +8,4 @@ resources:
 - postgres-pvc.yaml
 - postgres-secret.yaml
 - postgres-statefulset.yaml
-
-generators:
-  - postgres-secret.yaml
+- spoolman-configmap.yaml

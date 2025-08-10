@@ -44,3 +44,4 @@ This is a homelab for experimenting with linux and kubernetes. The two node mach
 - make spoolman use postgres and change spoolman deployment to stateful set
 - use k3s inbuilt volume management
 - add pipeline for building kubernetes for secrets
+- consider argocd for gitops, if not setup weave UI for fluxcd
