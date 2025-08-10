@@ -7,7 +7,7 @@ metadata:
     app: spoolman
 data:
   SPOOLMAN_DB_TYPE: postgres
-  SPOOLMAN_DB_HOST: spoolman-postgres
+  SPOOLMAN_DB_HOST: spoolman-db
   SPOOLMAN_DB_PORT: "5432"
   SPOOLMAN_DB_NAME: postgres
   SPOOLMAN_DB_USERNAME: postgres
