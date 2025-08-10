@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: spoolman-db
-        image: postgres:14.18
+        image: postgres:16-alpine
         imagePullPolicy: "IfNotPresent"
         ports:
         - containerPort: 5432
@@ -33,11 +33,11 @@ spec:
         volumeMounts:
         - name: pgdata
           mountPath: /var/lib/postgresql/data
-      volumeClaimTemplates:
-        - metadata:
-            name: pgdata
-          spec:
-            accessModes: ["ReadWriteOnce"]
-            resources:
-              requests:
-                storage: "1Gi"
+  volumeClaimTemplates:
+    - metadata:
+        name: pgdata
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: "1Gi"
