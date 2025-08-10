@@ -11,9 +11,6 @@ creation_rules:
     key_groups:
       - age:
           - *kian_wsl
-          - *linux_server
-          - *node_0
-          - *node_1
 
   # ############################ Kubernetes Secrets ############################ #
   # ########################### spoolman db password ########################### #
@@ -21,13 +18,11 @@ creation_rules:
     encrypted_regex: '^(data|stringData)$'
     key_groups:
       - age:
-          - *node_0
-          - *node_1
+          - *kian_wsl
 
   # ########################### homepage pihole token ########################## #
   - path_regex: ^kubernetes/.*/homepage/[^/]+\.ya?ml$
     encrypted_regex: '^(data|stringData)$'
     key_groups:
       - age:
-          - *node_0
-          - *node_1
+          - *kian_wsl
