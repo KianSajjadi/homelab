@@ -25,6 +25,15 @@ spec:
           limit:
             memory: "500Mi"
             cpu: "250m"
+        envFrom:
+          - configMapRef:
+              name: spoolman-config
+        env:
+          - name: SPOOLMAN_DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: postgres-secret
+                key: POSTGRES_PASSWORD
         ports:
         - containerPort: 8000
           name: spoolman-cport
