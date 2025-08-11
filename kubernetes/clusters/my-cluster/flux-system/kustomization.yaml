@@ -5,3 +5,4 @@ resources:
 - gotk-sync.yaml
 - spoolman-kustomization.yaml
 - homepage-kustomization.yaml
+- prometheus-kustomization.yaml
