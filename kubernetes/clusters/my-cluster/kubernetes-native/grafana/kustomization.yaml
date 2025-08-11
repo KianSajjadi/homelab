@@ -2,5 +2,4 @@ resources:
   - deployment.yaml
   - namespace.yaml
   - service.yaml
-  - pv.yaml
   - pvc.yaml

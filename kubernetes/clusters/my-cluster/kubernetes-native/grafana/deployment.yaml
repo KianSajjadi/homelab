@@ -44,8 +44,8 @@ spec:
           timeoutSeconds: 1
         volumeMounts:
           - mountPath: /var/lib/grafana
-            name: grafana-pv
+            name: grafana-storage
     volumes:
-      - name: grafana-pv
+      - name: grafana-storage
         persistentVolumeClaim:
           claimName: grafana-pvc
