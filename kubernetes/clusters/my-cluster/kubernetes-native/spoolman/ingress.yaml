@@ -25,3 +25,17 @@ spec:
             name: spoolman-service
             port:
               number: 7912
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: spoolman-ingress-route
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`spoolman.lan`)
+      kind: Rule
+      services:
+        - name: spoolman-service
+          port: 7912
