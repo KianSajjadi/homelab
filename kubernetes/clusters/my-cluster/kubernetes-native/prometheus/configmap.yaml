@@ -13,10 +13,10 @@ data:
         static_configs:
           - targets: ['localhost:9090']
 
-      - job_name: 'spoolman'
-        static_configs:
-          - targets: ['localhost:7912']
-      
-      - job_name: 'homepage'
-        static_configs:
-          - targets: ['localhost:3000']
+    - job_name: 'spoolman'
+      static_configs:
+        - targets: ['spoolman-service.spoolman.svc.cluster.local:7912']
+
+    - job_name: 'homepage'
+      static_configs:
+        - targets: ['homepage-service.homepage.svc.cluster.local:3000']
