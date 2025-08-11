@@ -11,6 +11,13 @@ spec:
   - host: spoolman.lan
     http:
       paths:
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: spoolman-service
+            port:
+              number: 7912
       - path: /
         pathType: Prefix
         backend:
