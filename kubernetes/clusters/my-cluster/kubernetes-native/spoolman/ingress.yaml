@@ -30,6 +30,7 @@ apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
   name: spoolman-ingress-route
+  namespace: spoolman
 spec:
   entryPoints:
     - web
