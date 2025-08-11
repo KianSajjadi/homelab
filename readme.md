@@ -39,10 +39,10 @@ This is a homelab for experimenting with linux and kubernetes. The two node mach
 - consider gitea
 - ~~add homepage~~
 - ~~add traefik-config for 80->8081 443 -> 8444 and manage all routes via nix~~
-- add prometheus
+- ~~add prometheus~~
 - ~~add SOPS-nix~~ I ended up using standard SOPS for kubernetes secrets instead of the sops-nix, will look into it further
-- make spoolman use postgres and change spoolman deployment to stateful set
-- use k3s inbuilt volume management
+- ~~make spoolman use postgres and change spoolman deployment to stateful set~~
+- ~~use k3s inbuilt volume management~~
 - add pipeline for building kubernetes for secrets
 - consider argocd for gitops, if not setup weave UI for fluxcd
 - cron job to backup postgres DB for spoolman
