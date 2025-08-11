@@ -26,6 +26,13 @@ spec:
         - name: homepage
           image: "ghcr.io/gethomepage/homepage:latest"
           imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "200Mi"
+              cpu: "50m"
+            limits:
+              memory: "500Mi"
+              cpu: "250m"
           env:
             - name: HOMEPAGE_ALLOWED_HOSTS
               value: homepage.lan # required, may need port. See gethomepage.dev/installation/#homepage_allowed_hosts
