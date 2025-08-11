@@ -6,3 +6,4 @@ resources:
 - spoolman-kustomization.yaml
 - homepage-kustomization.yaml
 - prometheus-kustomization.yaml
+- grafana-kustomization.yaml
