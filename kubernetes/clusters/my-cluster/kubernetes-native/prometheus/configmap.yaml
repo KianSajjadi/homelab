@@ -19,7 +19,7 @@ data:
 
       - job_name: 'grafana'
         static_configs:
-          - targets: ['grafana-service.homepage.svc.cluster.local:3000']
+          - targets: ['grafana-service.homepage.svc.cluster.local:3001']
 
       - job_name = "nodes"
         static_configs:
