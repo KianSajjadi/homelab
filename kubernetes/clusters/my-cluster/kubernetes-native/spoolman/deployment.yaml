@@ -40,7 +40,7 @@ spec:
         livenessProbe:
           httpGet:
             path: /api/vi/health
-            port: 7912
+            port: spoolman-cport
           initialDelaySeconds: 10
           periodSeconds: 3
 
