@@ -35,6 +35,8 @@ This is a homelab for experimenting with linux and kubernetes. The two node mach
   - Traefik 8081/8444
   - Nginx 80/443
   - node exporter 9100
+  - grafana 3001
+  - homepage 3000
 
 
 # TO DO

@@ -17,9 +17,9 @@ data:
         static_configs:
           - targets: ['spoolman-service.spoolman.svc.cluster.local:7912']
 
-      - job_name: 'homepage'
+      - job_name: 'grafana'
         static_configs:
-          - targets: ['homepage-service.homepage.svc.cluster.local:3000']
+          - targets: ['grafana-service.homepage.svc.cluster.local:3000']
 
       - job_name = "nodes"
         static_configs:
