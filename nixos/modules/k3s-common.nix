@@ -51,7 +51,7 @@
 
 /* ############################### NETWORKING ############################### */
   # needed for k3s setup
-  networking.firewall.allowedTCPPorts = [ 22 6443 10250 53 7912];
+  networking.firewall.allowedTCPPorts = [ 22 6443 10250 53 7912 9100 ];
   networking.firewall.allowedUDPPorts = [ 53 8472 ];
   #networking.nat.enable = true;
   #networking.nat.internalInterfaces = [ "cni0" ];
