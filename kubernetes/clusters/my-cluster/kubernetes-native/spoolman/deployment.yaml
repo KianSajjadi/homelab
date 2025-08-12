@@ -39,7 +39,7 @@ spec:
           name: spoolman-cport
         livenessProbe:
           httpGet:
-            path: /api/v1/health
+            path: /api/v1/health  
             port: spoolman-cport
           initialDelaySeconds: 10
           periodSeconds: 3
