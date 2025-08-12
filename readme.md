@@ -28,7 +28,13 @@ This is a homelab for experimenting with linux and kubernetes. The two node mach
 - Grafana
 - Spoolman
 - Homepage
+- Node exporter on all machines
 
+
+# Ports used
+  - Traefik 8081/8444
+  - Nginx 80/443
+  - node exporter 9100
 
 
 # TO DO
@@ -46,3 +52,4 @@ This is a homelab for experimenting with linux and kubernetes. The two node mach
 - add pipeline for building kubernetes for secrets
 - consider argocd for gitops, if not setup weave UI for fluxcd
 - cron job to backup postgres DB for spoolman
+- add node exporter 

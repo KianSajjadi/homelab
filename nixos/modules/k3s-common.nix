@@ -138,4 +138,16 @@
   #     K3S_URL = "@/etc/k3s-url";
   #   };
   # };
+
+  /* ######################## PROMETHEUS NODE EXPORTER ######################## */
+  services.prometheus.exporters.node = {
+    enable = true;
+    port = 9100;
+    enabledCollectors = [
+      "logind"
+      "systemd"
+    ];
+    openFirewall = true;
+    firewallFilter = "-i br0 -p tcp -m tcp --dport 9100";
+  };
 }
