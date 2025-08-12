@@ -21,6 +21,6 @@ data:
         static_configs:
           - targets: ['grafana-service.grafana.svc.cluster.local:3001']
 
-      - job_name = "nodes"
+      - job_name: "nodes"
         static_configs:
-          - targets: ['192.168.0.251:9100', '192.168.0.3:9100', '192.168.0.3:9100']
+        - targets: ['192.168.0.251:9100', '192.168.0.3:9100', '192.168.0.3']
