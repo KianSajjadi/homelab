@@ -37,3 +37,10 @@ spec:
         ports:
         - containerPort: 8000
           name: spoolman-cport
+        livenessProbe:
+          httpGet:
+            path: /api/vi/health
+            port: 7912
+          initialDelaySeconds: 10
+          periodSeconds: 3
+
