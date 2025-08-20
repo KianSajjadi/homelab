@@ -5,7 +5,7 @@ metadata:
 subjects:
 - kind: ServiceAccount
   name: prometheus-api-user
-  namespace: default
+  namespace: monitoring
 roleRef:
   kind: ClusterRole
   name: cluster-admin
