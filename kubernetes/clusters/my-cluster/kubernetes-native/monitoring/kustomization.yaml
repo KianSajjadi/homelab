@@ -1,0 +1,14 @@
+resources:
+  - namespace.yaml
+  - grafana/configmap.yaml
+  - grafana/deployment.yaml
+  - grafana/ingress.yaml
+  - grafana/pvc.yaml
+  - grafana/service.yaml
+  - prometheus/clusterrole.yaml
+  - prometheus/configmap.yaml
+  - prometheus/deployment.yaml
+  - prometheus/ingress.yaml
+  - prometheus/secret.yaml
+  - prometheus/service.yaml
+  - prometheus/serviceaccount.yaml
