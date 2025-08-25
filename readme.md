@@ -57,3 +57,4 @@ This is a homelab for experimenting with linux and kubernetes. The two node mach
 - cron job to backup postgres DB for spoolman
 - ~~add node exporter~~
 - Consolidate file structure to follow "verb" instead of "noun"
+- Update ingress to gateway at some point
