@@ -1,12 +1,26 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: paintman-db
+  name: paintman-db-service
   namespace: paintman
 spec:
   type: ClusterIP
   selector:
-    app: paintman-db
+    sfs: paintman-db
   ports:
   - port: 5432
     targetPort: 5432
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: paitnman-db-ext-service
+  namespace: paintman
+spec:
+  type: NodePort
+  selector:
+    sfs: paintman-db
+  ports:
+  - port: 5432
+    targetPort: 5432
+    nodePort: 30030
