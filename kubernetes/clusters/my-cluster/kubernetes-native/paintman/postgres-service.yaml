@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: paintman-db
-  namespace: spoolman
+  namespace: paintman
 spec:
   type: ClusterIP
   selector:
