@@ -1,7 +1,0 @@
-resources:
-  namespace.yaml
-  paintman-configmap.yaml
-  postgres-configmap.yaml
-  postgres-secret.yaml
-  postgres-service.yaml
-  postgres-statefulset.yaml
