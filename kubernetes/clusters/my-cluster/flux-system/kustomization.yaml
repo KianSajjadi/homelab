@@ -6,3 +6,4 @@ resources:
 - spoolman-kustomization.yaml
 - homepage-kustomization.yaml
 - monitoring-kustomization.yaml
+- paintman-kustomization.yaml
