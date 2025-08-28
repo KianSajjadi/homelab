@@ -26,3 +26,10 @@ creation_rules:
     key_groups:
       - age:
           - *kian_wsl
+
+    # ########################### paintman db password ########################### #
+  - path_regex: ^kubernetes/.*/paintman/[^/]+\.ya?ml$
+    encrypted_regex: '^(data|stringData)$'
+    key_groups:
+      - age:
+          - *kian_wsl

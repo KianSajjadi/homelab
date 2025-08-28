@@ -52,9 +52,12 @@ This is a homelab for experimenting with linux and kubernetes. The two node mach
 - ~~add SOPS-nix~~ I ended up using standard SOPS for kubernetes secrets instead of the sops-nix, will look into it further
 - ~~make spoolman use postgres and change spoolman deployment to stateful set~~
 - ~~use k3s inbuilt volume management~~
-- add pipeline for building kubernetes for secrets
+- add CI/CD pipeline for applications
 - consider argocd for gitops, if not setup weave UI for fluxcd
 - cron job to backup postgres DB for spoolman
 - ~~add node exporter~~
-- Consolidate file structure to follow "verb" instead of "noun"
+- ~~Consolidate file structure to follow "verb" instead of "noun"~~ - done for monitoring, will continue this convention in future
 - Update ingress to gateway at some point
+- Add hashicorp vault agent sidecar for dynamic DB credentials for spoolman/postgresdb
+- Add paintman kubernetes config
+- Add local docker image registry
