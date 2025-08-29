@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: github-runner
+  namespace: ci
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: github-runner
+  template:
+    metadata:
+      labels:
+        app: github-runner
+    spec:
+      containers:
+        - name: runner
+        # To be replaced with my own builder image soon
+          image: ghcr.io/actions/runner:latest
+          resources:
+            requests:
+              memory: "500Mi"
+              cpu: "250m"
+            limits:
+              memory: "750Mi"
+              cpu: "500m"
+            env:
+            - name: REPO_URL
+              value: "https://github.com/kiansajjadi/painting-app"
+            - name: RUNNER_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: RUNNER_WORKDIR
+              value: "_work"
+            - name: RUNNER_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: github-runner-secret
+                  key: GH_TOKEN
+          volumeMounts:
+            - name: work
+              mountPath: /_work
+      volumes:
+        - name: work
+          emptyDir: {}

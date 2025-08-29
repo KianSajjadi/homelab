@@ -33,3 +33,10 @@ creation_rules:
     key_groups:
       - age:
           - *kian_wsl
+
+  # #################################### CI #################################### #
+  - path_regex: ^kubernetes/.*/ci/[^/]+\.ya?ml$
+    encrypted_regex: '^(data|stringData)$'
+    key_groups:
+      - age:
+          - *kian_wsl

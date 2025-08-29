@@ -32,12 +32,12 @@ This is a homelab for experimenting with linux and kubernetes. The two node mach
 
 
 # Ports
-  - Traefik 8081/8444
-  - Nginx 80/443
+  - Traefik 80/443
   - node exporter 9100
   - grafana 3001
   - homepage 3000
   - prometheus 9080
+  - paintman 3002
 
 
 # TO DO
