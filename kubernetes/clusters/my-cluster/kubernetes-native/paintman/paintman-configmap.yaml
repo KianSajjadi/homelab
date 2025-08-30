@@ -6,9 +6,4 @@ metadata:
   labels:
     app: paintman
 data:
-  SPOOLMAN_DB_TYPE: postgres
-  SPOOLMAN_DB_HOST: paintman-db
-  SPOOLMAN_DB_PORT: "5432"
-  SPOOLMAN_DB_NAME: postgres
-  SPOOLMAN_DB_USERNAME: postgres
-  SPOOLMAN_METRICS_ENABLED: "false"
+  IDK_YET_SON: "DONT NEED"

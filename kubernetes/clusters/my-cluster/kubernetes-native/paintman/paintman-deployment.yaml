@@ -1,11 +1,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: paintman-frontend
+  name: paintman-frontend-deployment
   namespace: paintman
+  labels:
+    app: paintman-frontend
 spec:
+  replicas: 1
   selector:
-    mathLabels:
+    matchLabels:
       app: paintman-frontend
   template:
     metadata:
@@ -16,12 +19,14 @@ spec:
         - name: paintman-frontend
           image: ghcr.io/kiansajjadi/paintman-frontend
           imagePullPolicy: IfNotPresent
-          limits:
-            cpu: "250m"
-            memory: "250Mi"
-          requests:
-            cpu: "100m"
-            memory: "125Mi"
+          resources:
+            limits:
+              cpu: "250m"
+              memory: "250Mi"
+            requests:
+              cpu: "100m"
+              memory: "125Mi"
           ports:
             - containerPort: 5173
               protocol: TCP
+
