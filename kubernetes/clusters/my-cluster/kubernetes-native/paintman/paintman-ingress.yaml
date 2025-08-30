@@ -4,7 +4,7 @@ metadata:
   name: paintman-ingress
   namespace: paintman
   annotations:
-    traefik.ingress.kubernetes.io/router.entrypoints: web
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
 spec:
   ingressClassName: traefik
   rules:
