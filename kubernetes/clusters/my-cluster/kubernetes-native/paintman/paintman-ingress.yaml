@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: paintman-ingress
+  namespace: paintman
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: paintman.lan
+    http:
+      paths:
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: paintman-frontend-service
+            port:
+              number: 7912
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: paintman-frontend-service
+            port:
+              number: 7912
