@@ -11,13 +11,6 @@ spec:
   - host: paintman.lan
     http:
       paths:
-      - path: /api
-        pathType: Prefix
-        backend:
-          service:
-            name: paintman-frontend-service
-            port:
-              number: 5173
       - path: /
         pathType: Prefix
         backend:
