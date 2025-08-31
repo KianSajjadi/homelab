@@ -42,4 +42,4 @@ spec:
               service:
                 name: adguard-external
                 port:
-                  number: 80
+                  number: 3050
