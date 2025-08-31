@@ -1,0 +1,45 @@
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageRepository
+metadata:
+  name: paintman-frontend
+  namespace: flux-system
+spec:
+  image: ghcr.io/kiansajjadi/paintman-frontend
+  interval: 1m
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImagePolicy
+metadata:
+  name: paintman-frontend
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: paintman-frontend
+  policy:
+    semver:
+      range: 1.x
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImageUpdateAutomation
+metadata:
+  name: paintman-frontend
+  namespace: flux-system
+spec:
+  interval: 1m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  git:
+    checkout:
+      ref:
+        branch: master
+      commit:
+        author:
+          name: fluxcdbot
+          email: fluxcdbot@users.noreply.github.com
+        messageTemplate: 'chore: update images {{range .Updated.Images}}{{println .}}{{end}}'
+      push:
+        branch: master
+      update:
+        strategy: Setters
+        path: ./kubernetes/clusters/my-cluster/kubernetes-native/paintman
