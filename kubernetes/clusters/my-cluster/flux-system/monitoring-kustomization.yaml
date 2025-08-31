@@ -6,7 +6,7 @@ metadata:
 spec:
   interval: 1m
   targetNamespace: monitoring
-  path: ./kubernetes/clusters/my-cluster/kubernetes-native/monitoring
+  path: ./kubernetes/clusters/my-cluster/apps/monitoring
   prune: true
   sourceRef:
     kind: GitRepository

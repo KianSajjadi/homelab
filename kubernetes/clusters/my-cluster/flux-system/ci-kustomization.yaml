@@ -6,7 +6,7 @@ metadata:
 spec:
   interval: 1m
   targetNamespace: ci
-  path: ./kubernetes/clusters/my-cluster/kubernetes-native/ci
+  path: ./kubernetes/clusters/my-cluster/apps/ci
   prune: true
   sourceRef:
     kind: GitRepository

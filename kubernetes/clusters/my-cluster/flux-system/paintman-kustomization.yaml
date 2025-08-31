@@ -6,7 +6,7 @@ metadata:
 spec:
   interval: 1m
   targetNamespace: paintman
-  path: ./kubernetes/clusters/my-cluster/kubernetes-native/paintman
+  path: ./kubernetes/clusters/my-cluster/apps/paintman
   prune: true
   sourceRef:
     kind: GitRepository

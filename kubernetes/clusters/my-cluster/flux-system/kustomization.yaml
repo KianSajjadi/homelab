@@ -8,3 +8,4 @@ resources:
 - monitoring-kustomization.yaml
 - paintman-kustomization.yaml
 - kube-system.yaml
+- flux-image-components.yaml

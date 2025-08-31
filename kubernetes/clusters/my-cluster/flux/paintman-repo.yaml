@@ -19,7 +19,7 @@ spec:
     semver:
       range: 1.x
 ---
-apiVersion: image.toolkit.fluxcd.io/v1beta1
+apiVersion: image.toolkit.fluxcd.io/v1beta2
 kind: ImageUpdateAutomation
 metadata:
   name: paintman-frontend
@@ -33,13 +33,13 @@ spec:
     checkout:
       ref:
         branch: master
-      commit:
-        author:
-          name: fluxcdbot
-          email: fluxcdbot@users.noreply.github.com
-        messageTemplate: 'chore: update images {{range .Updated.Images}}{{println .}}{{end}}'
-      push:
-        branch: master
-      update:
-        strategy: Setters
-        path: ./kubernetes/clusters/my-cluster/kubernetes-native/paintman
+    commit:
+      author:
+        name: fluxcdbot
+        email: fluxcdbot@users.noreply.github.com
+      messageTemplate: 'chore: update images {{range .Updated.Images}}{{println .}}{{end}}'
+    push:
+      branch: master
+  update:
+    strategy: Setters
+    path: ./kubernetes/clusters/my-cluster/apps/paintman

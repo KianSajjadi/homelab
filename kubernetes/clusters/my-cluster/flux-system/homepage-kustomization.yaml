@@ -6,7 +6,7 @@ metadata:
 spec:
   interval: 1m
   targetNamespace: homepage
-  path: ./kubernetes/clusters/my-cluster/kubernetes-native/homepage
+  path: ./kubernetes/clusters/my-cluster/apps/homepage
   prune: true
   sourceRef:
     kind: GitRepository
