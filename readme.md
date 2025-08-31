@@ -31,7 +31,9 @@ This is a homelab for experimenting with linux and kubernetes. The two node mach
 - Node exporter on all machines
 
 
-# Ports
+
+# Networking
+## Ports
   - Traefik 80/443
   - node exporter 9100
   - grafana 3001
@@ -39,9 +41,13 @@ This is a homelab for experimenting with linux and kubernetes. The two node mach
   - prometheus 9080
   - paintman 3002
 
+## DNS
+Split horizon DNS so all .lan forwards to adguard DNS resolver
+
 
 # TO DO
-- internal network https
+- ~~internal network https~~
+- ~~Split horizon setup for coreDNS~~
 - check out multi-region kubernetes control plane setup
 - install ~~kustomize~~ and helm on nodes
 - github actions self hosted runner

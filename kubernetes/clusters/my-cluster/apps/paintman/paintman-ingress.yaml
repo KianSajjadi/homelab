@@ -17,11 +17,11 @@ spec:
           service:
             name: paintman-frontend-service
             port:
-              number: 7912
+              number: 5173
       - path: /
         pathType: Prefix
         backend:
           service:
             name: paintman-frontend-service
             port:
-              number: 7912
+              number: 5173
