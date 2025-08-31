@@ -4,11 +4,8 @@ metadata:
   name: adguard-external
   namespace: networking
 spec:
-  type: ClusterIP
-  ports:
-    - name: http
-      port: 80
-      targetPort: 3050
+  type: ExternalName
+  externalName: syd.adguard.lan
 ---
 apiVersion: v1
 kind: Endpoints
