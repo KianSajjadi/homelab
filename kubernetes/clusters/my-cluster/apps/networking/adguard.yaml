@@ -16,7 +16,7 @@ metadata:
   name: adguard-service-1
   namespace: networking
   labels:
-    kubernetes.io/service-name: adguard-service   # must match Service name
+    kubernetes.io/service-name: adguard-service
 addressType: IPv4
 ports:
   - name: http

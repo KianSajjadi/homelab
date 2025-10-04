@@ -5,6 +5,8 @@ metadata:
   namespace: spoolman
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/router.tls.certresolver: ca-lan
 spec:
   ingressClassName: traefik
   rules:
@@ -26,6 +28,7 @@ spec:
             port:
               number: 7912
 ---
+# Added for mainsail 3d printer websocket requirement
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
