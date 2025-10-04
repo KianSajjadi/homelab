@@ -37,6 +37,8 @@ metadata:
 spec:
   entryPoints:
     - websecure
+  tls:
+    certResolver: ca-lan
   routes:
     - match: Host(`spoolman.lan`)
       kind: Rule
