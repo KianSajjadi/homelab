@@ -10,10 +10,10 @@ spec:
   ingressClassName: traefik
   tls:
   - hosts:
-    - spoolman.lan
+    - spoolman.syd.broc.ee
     secretName: spoolman-tls
   rules:
-  - host: spoolman.lan
+  - host: spoolman.syd.broc.ee
     http:
       paths:
       - path: /api
@@ -43,7 +43,7 @@ spec:
   tls:
     secretName: spoolman-tls
   routes:
-    - match: Host(`spoolman.lan`)
+    - match: Host(`spoolman.syd.broc.ee`)
       kind: Rule
       services:
         - name: spoolman-service
