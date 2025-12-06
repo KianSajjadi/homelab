@@ -56,7 +56,7 @@
   #networking.nat.enable = true;
   #networking.nat.internalInterfaces = [ "cni0" ];
   services.resolved.enable = false;
-  networking.nameservers = [ "1.1.1.1" "8.8.8.8" ];
+  networking.nameservers = [ "192.168.0.251" "1.1.1.1" "8.8.8.8" ];
 
   # Install firefox.
   programs.firefox.enable = true;

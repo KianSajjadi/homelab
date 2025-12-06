@@ -1,3 +1,13 @@
 *.secret*
 **/result/
 .secret
+
+# ################################# TERRAFORM ################################ #
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+# ################################# ENV VARS ################################# #
+.env
+*.env

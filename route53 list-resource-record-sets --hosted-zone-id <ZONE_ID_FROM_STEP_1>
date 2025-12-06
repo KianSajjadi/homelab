@@ -1,0 +1,34 @@
+{
+    "HostedZones": [
+        {
+            "Id": "/hostedzone/Z06047061MRVGX5SP6XG3",
+            "Name": "broc.ee.",
+            "CallerReference": "31c059b9-6fed-429d-b334-4252ad3c0150",
+            "Config": {
+                "Comment": "broc.ee root domain",
+                "PrivateZone": false
+            },
+            "ResourceRecordSetCount": 7
+        },
+        {
+            "Id": "/hostedzone/Z04837162WUP52EK060H5",
+            "Name": "internal.broc.ee.",
+            "CallerReference": "a0f7b645-8757-4a3c-ac6d-ff280d3bd78e",
+            "Config": {
+                "Comment": "internal stuff",
+                "PrivateZone": false
+            },
+            "ResourceRecordSetCount": 2
+        },
+        {
+            "Id": "/hostedzone/Z00631181ZDX1ZAGD3VA2",
+            "Name": "tll.broc.ee.",
+            "CallerReference": "4c1af7bb-a480-44f9-8d9b-5266c5908568",
+            "Config": {
+                "Comment": "eu-tll zone records",
+                "PrivateZone": false
+            },
+            "ResourceRecordSetCount": 3
+        }
+    ]
+}

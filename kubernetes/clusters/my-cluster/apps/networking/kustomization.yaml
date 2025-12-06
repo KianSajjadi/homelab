@@ -1,4 +1,5 @@
 resources:
   - namespace.yaml
   - adguard.yaml
-  - adguard-certificate.yaml
+  # Temporarily disabled until cert-manager is installed
+  # - adguard-certificate.yaml
