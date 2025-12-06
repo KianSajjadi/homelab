@@ -32,9 +32,6 @@ kind: IngressRoute
 metadata:
   name: adguard-ingress-route
   namespace: networking
-  annotations:
-    traefik.ingress.kubernetes.io/router.entrypoints: websecure
-    traefik.ingress.kubernetes.io/router.tls.certresolver: ca-lan
 spec:
   entryPoints:
     - websecure
@@ -46,4 +43,4 @@ spec:
           kind: Service
           port: 3050
   tls:
-    certResolver: ca-lan
+    secretName: adguard-tls

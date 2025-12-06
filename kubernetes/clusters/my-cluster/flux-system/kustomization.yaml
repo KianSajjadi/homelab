@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
 - gotk-components.yaml
 - gotk-sync.yaml
+- cert-manager-kustomization.yaml
 - spoolman-kustomization.yaml
 - homepage-kustomization.yaml
 - monitoring-kustomization.yaml

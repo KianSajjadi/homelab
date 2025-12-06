@@ -5,9 +5,13 @@ metadata:
   namespace: monitoring
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
-    traefik.ingress.kubernetes.io/router.tls.certresolver: ca-lan
+    cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   ingressClassName: traefik
+  tls:
+  - hosts:
+    - grafana.lan
+    secretName: grafana-tls
   rules:
   - host: grafana.lan
     http:

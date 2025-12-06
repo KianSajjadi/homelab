@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: paintman-frontend
-          image: ghcr.io/kiansajjadi/paintman-frontend:latest
+          image: ghcr.io/kiansajjadi/paintman-frontend:latest # {"$imagepolicy": "flux-system:paintman-frontend"}
           imagePullPolicy: IfNotPresent
           resources:
             limits:

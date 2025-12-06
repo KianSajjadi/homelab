@@ -5,11 +5,15 @@ metadata:
   namespace: paintman
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
-    traefik.ingress.kubernetes.io/router.tls.certresolver: ca-lan
+    cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   ingressClassName: traefik
+  tls:
+  - hosts:
+    - paintman.syd.broc.ee
+    secretName: paintman-tls
   rules:
-  - host: paintman.lan
+  - host: paintman.syd.broc.ee
     http:
       paths:
       - path: /
