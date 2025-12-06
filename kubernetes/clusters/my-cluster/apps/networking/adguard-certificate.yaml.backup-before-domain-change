@@ -9,4 +9,4 @@ spec:
     name: letsencrypt-prod
     kind: ClusterIssuer
   dnsNames:
-  - adguard.syd.broc.ee
+  - syd.adguard.lan

@@ -36,7 +36,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`syd.adguard.lan`)
+    - match: Host(`adguard.syd.broc.ee`)
       kind: Rule
       services:
         - name: adguard-service
