@@ -3,12 +3,13 @@
 ## Overview
 This is a homelab for experimenting with linux and kubernetes. The two node machines are running [NixOS](https://nixos.org/) which are managed via [Nix Flakes](https://nixos.wiki/wiki/Flakes) in the nixos [directory](nixos/).
 
-[K3S](https://k3s.io) is installed on the linux-server as the control plane. \
-[agenix](https://github.com/ryantm/agenix) and [sops]() are used for encrypting all secrets with the ssh keys. \
-[Kubernetes](https://kubernetes.io/) manifests exist in both raw kubernetes templates and helm charts - to increase familiarity with both \
+[K3S](https://k3s.io) is installed on mainboy as the control plane. \
+[FluxCD](https://fluxcd.io/) is used for GitOps continuous delivery. \
+[agenix](https://github.com/ryantm/agenix) and [sops](https://github.com/mozilla/sops) are used for encrypting secrets with age keys. \
+[Kubernetes](https://kubernetes.io/) manifests are managed via Kustomize and Helm charts.
 
 ### Hardware
-- Linux server
+- Mainboy
   - i5-4690k
   - 16gb ram
   - no gpu
@@ -18,17 +19,16 @@ This is a homelab for experimenting with linux and kubernetes. The two node mach
     - N150 mini pc
 
 ### Operating systems
-- Linux server: ubuntu 24.05
+- mainboy (control plane): Ubuntu 24.04
 - Homelab-node-0: NixOS
 - Homelab-node-1: NixOS
 
 ### Software
 #### Services
-- Kubernetes
-- Grafana
-- Spoolman
-- Homepage
-- Node exporter on all machines
+- **Infrastructure**: K3s, FluxCD, Traefik, cert-manager
+- **Monitoring**: Prometheus, Grafana, Node Exporter
+- **Applications**: Homepage, Spoolman, Paintman
+- **DNS**: AdGuard Home
 
 
 
@@ -65,5 +65,5 @@ Split horizon DNS so all .lan forwards to adguard DNS resolver
 - ~~Consolidate file structure to follow "verb" instead of "noun"~~ - done for monitoring, will continue this convention in future
 - Update ingress to gateway at some point
 - Add hashicorp vault agent sidecar for dynamic DB credentials for spoolman/postgresdb
-- Add paintman kubernetes config
+- ~~Add paintman kubernetes config~~
 - Add local docker image registry
