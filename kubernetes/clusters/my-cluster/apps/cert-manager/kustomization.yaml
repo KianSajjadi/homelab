@@ -5,6 +5,5 @@ resources:
   - helmrepository.yaml
   - helmrelease.yaml
   - aws-credentials-secret.yaml
-  # Temporarily disabled until cert-manager CRDs are installed
-  # - clusterissuer-letsencrypt-staging.yaml
-  # - clusterissuer-letsencrypt-prod.yaml
+  - clusterissuer-letsencrypt-staging.yaml
+  - clusterissuer-letsencrypt-prod.yaml
