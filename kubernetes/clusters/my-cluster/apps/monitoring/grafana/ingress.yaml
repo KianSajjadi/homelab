@@ -10,10 +10,10 @@ spec:
   ingressClassName: traefik
   tls:
   - hosts:
-    - grafana.lan
+    - grafana.syd.broc.ee
     secretName: grafana-tls
   rules:
-  - host: grafana.lan
+  - host: grafana.syd.broc.ee
     http:
       paths:
       - path: /
