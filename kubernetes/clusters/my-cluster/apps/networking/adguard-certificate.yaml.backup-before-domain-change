@@ -6,7 +6,7 @@ metadata:
 spec:
   secretName: adguard-tls
   issuerRef:
-    name: letsencrypt-prod
+    name: letsencrypt
     kind: ClusterIssuer
   dnsNames:
   - syd.adguard.lan

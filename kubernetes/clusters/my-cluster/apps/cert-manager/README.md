@@ -67,7 +67,7 @@ sops -e -i kubernetes/clusters/my-cluster/apps/cert-manager/aws-credentials-secr
 
 Edit both ClusterIssuer files and update the following fields:
 
-**In `clusterissuer-letsencrypt-staging.yaml` and `clusterissuer-letsencrypt-prod.yaml`:**
+**In `clusterissuer-letsencrypt.yaml`:**
 
 1. **Email**: Replace `your-email@example.com` with your actual email for Let's Encrypt notifications
 2. **AWS Region**: Replace `us-east-1` with your AWS region
@@ -129,11 +129,7 @@ kubectl describe certificate <cert-name> -n <namespace>
 ```
 
 ## Certificate Issuers
-
-- **letsencrypt-staging**: Use this for testing to avoid rate limits
-- **letsencrypt-prod**: Use this for production certificates
-
-Start with staging, then switch to prod once everything works.
+- **letsencrypt**: Use this for certificates
 
 ## Troubleshooting
 
