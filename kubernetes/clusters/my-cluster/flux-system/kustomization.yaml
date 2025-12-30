@@ -10,3 +10,4 @@ resources:
 - paintman-kustomization.yaml
 - kube-system.yaml
 - weave-gitops-kustomization.yaml
+- longhorn-kustomization.yaml
