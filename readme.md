@@ -40,6 +40,7 @@ This is a homelab for experimenting with linux and kubernetes. The two node mach
   - homepage 3000
   - prometheus 9080
   - paintman 3002
+  - weave 9001
 
 ## DNS
 Split horizon DNS so all .lan forwards to adguard DNS resolver
@@ -59,7 +60,7 @@ Split horizon DNS so all .lan forwards to adguard DNS resolver
 - ~~make spoolman use postgres and change spoolman deployment to stateful set~~
 - ~~use k3s inbuilt volume management~~
 - add CI/CD pipeline for applications
-- consider argocd for gitops, if not setup weave UI for fluxcd
+- ~~setup weave UI for fluxcd~~
 - cron job to backup postgres DB for spoolman
 - ~~add node exporter~~
 - ~~Consolidate file structure to follow "verb" instead of "noun"~~ - done for monitoring, will continue this convention in future

@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: weave-ingress
+  namespace: flux-system
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  ingressClassName: traefik
+  tls:
+  - hosts:
+    - weave.syd.broc.ee
+    secretName: weave-tls
+  rules:
+  - host: weave.syd.broc.ee
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: weave-service
+            port:
+              number: 9001
