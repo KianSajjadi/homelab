@@ -9,6 +9,7 @@
     age
     dig
     sops
+    openiscsi
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -149,5 +150,11 @@
     ];
     openFirewall = true;
     firewallFilter = "-i br0 -p tcp -m tcp --dport 9100";
+  };
+
+  /* ################################ openiscsi ############################### */
+  services.openiscsi = {
+    enable = true;
+    name = "iqn.1993-08.org.debian:01:longhorn";
   };
 }

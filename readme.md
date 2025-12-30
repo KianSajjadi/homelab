@@ -46,6 +46,9 @@ This is a homelab for experimenting with linux and kubernetes. The two node mach
 Split horizon DNS so all .lan forwards to adguard DNS resolver
 
 
+## Node requirements
+- open-iscsi on all nodes
+
 # TO DO
 - ~~internal network https~~
 - ~~Split horizon setup for coreDNS~~
