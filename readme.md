@@ -30,7 +30,15 @@ This is a homelab for experimenting with linux and kubernetes. The two node mach
 - **Applications**: Homepage, Spoolman, Paintman
 - **DNS**: AdGuard Home
 
-
+### Endpoints
+- weave.syd.broc.ee
+- longhorn.syd.broc.ee
+- paintman.syd.broc.ee
+- adguard.syd.broc.ee
+- grafana.syd.broc.ee
+- prometheus.syd.broc.ee
+- spoolman.syd.broc.ee
+- TODO homepage.syd.broc.ee
 
 # Networking
 ## Ports
@@ -49,6 +57,7 @@ Split horizon DNS so all .lan forwards to adguard DNS resolver
 
 ## Node requirements
 - open-iscsi on all nodes
+- nixos requires additional steps for open-iscsi see nixos/modules/k3s-common.nix under the openiscsi section
 
 # TO DO
 - ~~internal network https~~
