@@ -1,11 +1,11 @@
 resources:
-  - deployment.yaml
-# - service.yaml
-# - namespace.yaml
-# - ingress.yaml
-# - postgres-configmap.yaml
-# - postgres-pv.yaml
-# - postgres-pvc.yaml
-# - postgres-secret.yaml
-# - postgres-statefulset.yaml
-# - spoolman-configmap.yaml
+- deployment.yaml
+- service.yaml
+- namespace.yaml
+- ingress.yaml
+- postgres-configmap.yaml
+- postgres-pv.yaml
+- postgres-pvc.yaml
+- postgres-secret.yaml
+- postgres-statefulset.yaml
+- spoolman-configmap.yaml
