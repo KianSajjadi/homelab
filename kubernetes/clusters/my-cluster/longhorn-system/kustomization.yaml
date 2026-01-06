@@ -2,3 +2,4 @@ resources:
   - helmrelease.yaml
   - helmrepo.yaml
   - namespace.yaml
+  - longhorn-ui.yaml

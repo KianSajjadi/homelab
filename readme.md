@@ -41,6 +41,7 @@ This is a homelab for experimenting with linux and kubernetes. The two node mach
   - prometheus 9080
   - paintman 3002
   - weave 9001
+  - longhorn 9002
 
 ## DNS
 Split horizon DNS so all .lan forwards to adguard DNS resolver

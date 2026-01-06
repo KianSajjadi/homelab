@@ -152,6 +152,8 @@
     firewallFilter = "-i br0 -p tcp -m tcp --dport 9100";
   };
 
+
+  /* Following is needed to make longhorn work with nixos */
   /* ################################ openiscsi ############################### */
   services.openiscsi = {
     enable = true;
@@ -162,4 +164,10 @@
     PrivateMounts = "yes";
     BindPaths = "/run/current-system/sw/bin:/bin";
   };
+
+  systemd.tmpfiles.rules = [
+    "d /var/lib/longhorn 0700 root root -"
+    "L+ /usr/bin/iscsiadm - - - - ${pkgs.openiscsi}/bin/iscsiadm"
+    "L+ /usr/bin/mount.nfs - - - - ${pkgs.nfs-utils}/bin/mount.nfs"
+  ];
 }
