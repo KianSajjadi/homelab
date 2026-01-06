@@ -155,6 +155,11 @@
   /* ################################ openiscsi ############################### */
   services.openiscsi = {
     enable = true;
-    name = "iqn.1993-08.org.debian:01:longhorn";
+    name = "${config.networking.hostName}-initiatorhost";
+  };
+
+  systemd.services.iscsid.serviceConfig = {
+    PrivateMounts = "yes";
+    BindPaths = "/run/current-system/sw/bin:/bin";
   };
 }
