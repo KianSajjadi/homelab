@@ -1,9 +1,0 @@
-resources:
-- deployment.yaml
-- cluster-role.yaml
-- configmap.yaml
-- ingress.yaml
-- secret.yaml
-- service-account.yaml
-- service.yaml
-- namespace.yaml

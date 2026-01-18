@@ -5,7 +5,6 @@ resources:
 - gotk-sync.yaml
 - cert-manager-kustomization.yaml
 - spoolman-kustomization.yaml
-- homepage-kustomization.yaml
 - monitoring-kustomization.yaml
 - paintman-kustomization.yaml
 - kube-system.yaml
