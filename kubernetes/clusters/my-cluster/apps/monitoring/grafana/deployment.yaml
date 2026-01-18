@@ -13,6 +13,9 @@ spec:
       labels:
         app: grafana
     spec:
+      securityContext:
+        fsGroup: 472
+        fsGroupChangePolicy: OnRootMismatch
       tolerations:
       - key: "node.kubernetes.io/unreachable"
         operator: "Exists"
