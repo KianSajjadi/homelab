@@ -13,6 +13,15 @@ spec:
       labels:
         app: grafana
     spec:
+      tolerations:
+      - key: "node.kubernetes.io/unreachable"
+        operator: "Exists"
+        effect: "NoExecute"
+        tolerationSeconds: 30
+      - key: "node.kubernetes.io/not-ready"
+        operator: "Exists"
+        effect: "NoExecute"
+        tolerationSeconds: 30
       containers:
       - name: grafana
         image: grafana/grafana:latest
