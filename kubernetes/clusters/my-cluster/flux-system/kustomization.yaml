@@ -11,3 +11,4 @@ resources:
 - kube-system.yaml
 - weave-gitops-kustomization.yaml
 - longhorn-kustomization.yaml
+- printer-kustomization.yaml

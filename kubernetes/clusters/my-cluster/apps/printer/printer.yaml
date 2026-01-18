@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: printer-service
+  namespace: networking
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+---
+apiVersion: discovery.k8s.io/v1
+kind: EndpointSlice
+metadata:
+  name: printer-EndpointSlice
+  namespace: printer
+  labels:
+    kubernetes.io/service-name: printer-service
+addressType: IPv4
+ports:
+  - name: http
+    protocol: TCP
+    port: 80
+endpoints:
+  - addresses: ["192.168.0.238"]
+    conditions:
+      ready: true
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: printer-ingress-route
+  namespace: printer
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`printer.syd.broc.ee`)
+      kind: Rule
+      services:
+        - name: printer-service
+          kind: Service
+          port: 80
+  tls:
+    secretName: printer-tls
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: printer-cert
+  namespace: printer
+spec:
+  secretName: printer-tls
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+  dnsNames:
+  - printer.syd.broc.ee
