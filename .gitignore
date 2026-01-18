@@ -1,6 +1,7 @@
 *.secret*
 **/result/
 .secret
+.secrets
 
 # ################################# TERRAFORM ################################ #
 *.tfstate

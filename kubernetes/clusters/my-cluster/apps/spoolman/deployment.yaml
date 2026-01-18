@@ -41,6 +41,6 @@ spec:
           httpGet:
             path: /api/v1/health  
             port: spoolman-cport
-          initialDelaySeconds: 10
-          periodSeconds: 3
+          initialDelaySeconds: 60
+          periodSeconds: 10
 
