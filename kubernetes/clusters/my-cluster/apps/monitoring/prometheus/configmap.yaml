@@ -3,6 +3,8 @@ kind: ConfigMap
 metadata:
   name: prometheus-config
   namespace: monitoring
+  labels:
+    reconcile.fluxcd.io/watch: Enabled
 data:
   prometheus.yml: |
     global:
