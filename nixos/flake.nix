@@ -13,7 +13,7 @@
       homelab-node-0 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./modules/k3s-common.nix
+          ./modules/k3s.nix
           ./hosts/homelab-node-0.nix
           agenix.nixosModules.default
           sops-nix.nixosModules.sops
@@ -26,7 +26,7 @@
       homelab-node-1 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./modules/k3s-common.nix
+          ./modules/nas.nix
           ./hosts/homelab-node-1.nix
           agenix.nixosModules.default
           sops-nix.nixosModules.sops

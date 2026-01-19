@@ -59,6 +59,13 @@ Split horizon DNS so all .lan forwards to adguard DNS resolver
 - open-iscsi on all nodes
 - nixos requires additional steps for open-iscsi see nixos/modules/k3s-common.nix under the openiscsi section
 
+
+## NAS Datasets
+tank/data/media
+tank/data/backups
+tank/data/documents
+tank/data/scratch
+
 # TO DO
 - ~~internal network https~~
 - ~~Split horizon setup for coreDNS~~
