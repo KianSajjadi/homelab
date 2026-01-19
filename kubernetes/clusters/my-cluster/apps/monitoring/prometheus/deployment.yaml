@@ -31,10 +31,7 @@ spec:
               mountPath: /etc/prometheus/prometheus.yml
               subPath: prometheus.yml
               readOnly: true
-          volumes:
-            - name: config-volume
-              configMap:
-                name: prometheus-config
-                items:
-                  - key: prometheus.yml
-                    path: prometheus.yml
+      volumes:
+        - name: config-volume
+          configMap:
+            name: prometheus-config
