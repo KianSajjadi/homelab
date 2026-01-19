@@ -9,7 +9,6 @@ resources:
   - grafana/pvc.yaml
   - grafana/service.yaml
   - prometheus/clusterrole.yaml
-  - prometheus/configmap.yaml
   - prometheus/deployment.yaml
   - prometheus/ingress.yaml
   - prometheus/secret.yaml
