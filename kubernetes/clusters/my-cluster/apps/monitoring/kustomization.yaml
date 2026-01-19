@@ -14,9 +14,8 @@ resources:
     - prometheus/secret.yaml
     - prometheus/service.yaml
     - prometheus/serviceaccount.yaml
-
-  configMapGenerator:
-    - name: prometheus-config
-      namespace: monitoring
-      files:
-        - prometheus.yml=prometheus/prometheus.yml
+configMapGenerator:
+  - name: prometheus-config
+    namespace: monitoring
+    files:
+      - prometheus.yml=prometheus/prometheus.yml
