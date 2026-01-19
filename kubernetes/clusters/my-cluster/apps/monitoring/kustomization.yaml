@@ -19,4 +19,4 @@ configMapGenerator:
   - name: prometheus-config
     namespace: monitoring
     files:
-      - prometheus.yaml=prometheus/prometheus.yaml
+      - prometheus.yml=prometheus/prometheus.yaml

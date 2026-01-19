@@ -28,9 +28,13 @@ spec:
             - containerPort: 9090
           volumeMounts:
             - name: config-volume
-              mountPath: /etc/prometheus
-      volumes:
-        - name: config-volume
-          configMap:
-            name: prometheus-config
-            defaultMode: 420
+              mountPath: /etc/prometheus/prometheus.yml
+              subPath: prometheus.yaml
+              readOnly: true
+          volumes:
+            - name: config-volume
+              configMap:
+                name: prometheus-config
+                items:
+                  - key: prometheus.yaml
+                    path: prometheus.yaml
