@@ -12,7 +12,7 @@ spec:
       version: "4.5.2"
       sourceRef:
         kind: HelmRepository
-        name: radarr
+        name: k8s-at-home
         namespace: flux-system
       interval: 1h
   values:
