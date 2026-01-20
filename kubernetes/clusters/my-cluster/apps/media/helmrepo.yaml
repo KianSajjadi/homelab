@@ -3,7 +3,7 @@ apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: pree-helm-charts
-  namespace: flux-system
+  namespace: media
 spec:
   interval: 1h
   url: https://pree.github.io/helm-charts/
@@ -12,7 +12,7 @@ apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: k8s-home-lab
-  namespace: flux-system
+  namespace: media
 spec:
   interval: 1h
   url: https://k8s-home-lab.github.io/helm-charts/

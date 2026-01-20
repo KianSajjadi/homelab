@@ -13,7 +13,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: pree-helm-charts
-        namespace: flux-system
+        namespace: media
       interval: 1h
   values:
     affinity:
@@ -41,7 +41,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: pree-helm-charts
-        namespace: flux-system
+        namespace: media
   values:
     affinity:
       nodeAffinity:
@@ -67,8 +67,8 @@ spec:
       version: "7.2.0"
       sourceRef:
         kind: HelmRepository
-        name: 
-        namespace: flux-system
+        name: plex
+        namespace: media
   values:
     affinity:
       nodeAffinity:
