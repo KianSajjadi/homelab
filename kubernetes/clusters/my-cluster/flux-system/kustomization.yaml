@@ -11,3 +11,4 @@ resources:
 - weave-gitops-kustomization.yaml
 - longhorn-kustomization.yaml
 - printer-kustomization.yaml
+- media-kustomization.yaml
