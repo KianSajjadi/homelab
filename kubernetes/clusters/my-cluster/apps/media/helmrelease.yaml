@@ -8,17 +8,13 @@ metadata:
   chart:
     spec:
       chart: 
-      version: "v4.5.2"
+      version: "4.5.2"
       sourceRef:
         kind: HelmRepository
         name: radarr
         namespace: media
       interval: 1h
   values:
-    installCRDs: true
-    global:
-      leaderElection:
-        namespace: media
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
