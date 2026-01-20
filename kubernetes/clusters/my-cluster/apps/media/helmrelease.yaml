@@ -13,7 +13,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: radarr
-        namespace: media
+        namespace: flux-system
       interval: 1h
   values:
     affinity:
