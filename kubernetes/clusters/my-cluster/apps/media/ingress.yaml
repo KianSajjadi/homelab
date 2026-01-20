@@ -24,3 +24,30 @@ spec:
             name: radarr
             port:
               number: 7878
+---
+# Sonarr
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sonarr-ingress
+  namespace: media
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  ingressClassName: traefik
+  tls:
+  - hosts:
+    - sonarr.syd.broc.ee
+    secretName: radarr-tls
+  rules:
+  - host: sonarr.syd.broc.ee
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: radarr
+            port:
+              number: 8989
