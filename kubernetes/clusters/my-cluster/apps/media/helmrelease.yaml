@@ -4,7 +4,6 @@ kind: HelmRelease
 metadata:
   name: radarr
   namespace: media
-  interval: 30m
   chart:
     spec:
       chart: radarr
