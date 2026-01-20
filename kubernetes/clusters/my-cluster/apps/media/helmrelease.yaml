@@ -40,7 +40,6 @@ spec:
         kind: HelmRepository
         name: pree-helm-charts
         namespace: flux-system
-      inverval: 1h
   values:
     affinity:
       nodeAffinity:
