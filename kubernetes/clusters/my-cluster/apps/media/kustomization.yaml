@@ -4,3 +4,4 @@ resources:
   - ingress.yaml
   - helmrepo.yaml
   - volumes.yaml
+  - svc.yaml
