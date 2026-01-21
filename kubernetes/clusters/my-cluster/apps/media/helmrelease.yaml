@@ -108,7 +108,7 @@ spec:
       chart: transmission
       version: "1.7.0"
       sourceRef:
-        kind: OCIRepository
+        kind: HelmRepository
         name: lexfrei-charts
   values:
     affinity:

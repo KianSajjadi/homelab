@@ -1,10 +1,9 @@
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: OCIRepository
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
 metadata:
   name: lexfrei-charts
   namespace: media
 spec:
   interval: 1h
+  type: oci
   url: oci://ghcr.io/lexfrei/charts
-  ref:
-    semver: ">=0.0.0"
