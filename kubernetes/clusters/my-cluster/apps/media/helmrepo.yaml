@@ -16,3 +16,21 @@ metadata:
 spec:
   interval: 1h
   url: https://k8s-home-lab.github.io/helm-charts/
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: transmission
+  namespace: media
+spec:
+  interval: 1h
+  url: oci://ghcr.io/lexfrei/charts/transmission
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: jackett
+  namespace: media
+spec:
+  interval: 1h
+  url: https://k8s-at-home.com/charts/

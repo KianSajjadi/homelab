@@ -94,3 +94,67 @@ spec:
         enabled: true
         existingClaim: media-nfs-pvc
         mountPath: /media
+---
+# Transmission
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: transmission
+  namespace: media
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: transmission
+      version: "1.7.0"
+      sourceRef:
+        kind: HelmRepository
+        name: transmission
+  values:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values: [mainboy]
+    persistence:
+      media:
+        enabled: true
+        existingClaim: media-nfs-pvc
+        mountPath: /media
+
+    config:
+      download-dir: /media/downloads
+      incomplete-dir-enabled: false
+---
+# Jackett
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: jackett
+  namespace: media
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: transmission
+      version: "11.7.2"
+      sourceRef:
+        kind: HelmRepository
+        name: jackett
+  values:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values: [mainboy]
+    persistence:
+      config:
+        enabled: true
+        existingClaim: media-nfs-pvc
+        mountPath: /config
