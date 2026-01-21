@@ -3,3 +3,4 @@ resources:
   - helmrelease.yaml
   - ingress.yaml
   - helmrepo.yaml
+  - volumes.yaml
