@@ -68,6 +68,20 @@
     ];
   };
 
+
+
+
+/* ############################### NETWORKING ############################### */
+  # needed for k3s setup
+  networking.firewall.allowedTCPPorts = [ 80 443 22 6443 10250 53 7912 9100 2049 ];
+  networking.firewall.allowedUDPPorts = [ 80 443 53 8472 2049 ];
+  #networking.nat.enable = true;
+  #networking.nat.internalInterfaces = [ "cni0" ];
+  services.resolved.enable = false;
+  networking.nameservers = [ "192.168.0.251" "1.1.1.1" "8.8.8.8" ];
+
+  
+
   /* ########################################################################## */
   /*                                  SERVICES                                  */
   /* ########################################################################## */
@@ -92,7 +106,17 @@
 
   boot.zfs.devNodes = "/dev/disk/by-id";
 
-  /* ################################## SAMBA ################################# */
+  /* ################################### NFS ################################## */
+  services.nfs.server = {
+    enable = true;
+
+    exports = ''
+      /tank/media  *(rw,sync,no_subtree_check,no_root_squash)
+    '';
+  };
+
+  # NFS needs RPC services
+  services.rpcbind.enable = true;
 
 
   /* ########################################################################## */
