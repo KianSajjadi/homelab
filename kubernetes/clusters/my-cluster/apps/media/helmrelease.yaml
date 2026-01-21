@@ -108,8 +108,8 @@ spec:
       chart: transmission
       version: "1.7.0"
       sourceRef:
-        kind: HelmRepository
-        name: transmission
+        kind: OCIRepository
+        name: lexfrei-charts
   values:
     affinity:
       nodeAffinity:
