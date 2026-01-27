@@ -94,6 +94,10 @@ spec:
         enabled: true
         existingClaim: media-nfs-pvc
         mountPath: /media
+      config:
+        enabled: true
+        existingClaim: plex-config-pvc
+        mountPath: /config
 ---
 # Transmission
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
@@ -139,7 +143,7 @@ spec:
   interval: 30m
   chart:
     spec:
-      chart: transmission
+      chart: jackett
       version: "11.7.2"
       sourceRef:
         kind: HelmRepository
