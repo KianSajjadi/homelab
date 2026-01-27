@@ -98,6 +98,10 @@ spec:
         enabled: true
         existingClaim: plex-config-pvc
         mountPath: /config
+
+    podSecurityContext:
+      fsGroup: 65534
+      fsGroupChangePolicy: "OnRootMismatch"
 ---
 # Transmission
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
