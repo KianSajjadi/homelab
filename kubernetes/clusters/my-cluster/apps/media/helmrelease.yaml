@@ -9,10 +9,10 @@ spec:
   chart:
     spec:
       chart: radarr
-      version: "1.8.1"
+      version: "17.4.0"
       sourceRef:
         kind: HelmRepository
-        name: pree-helm-charts
+        name: k8s-home-lab
         namespace: media
       interval: 1h
   values:
@@ -50,10 +50,10 @@ spec:
   chart:
     spec:
       chart: sonarr
-      version: "1.12.1"
+      version: "17.2.1"
       sourceRef:
         kind: HelmRepository
-        name: pree-helm-charts
+        name: k8s-home-lab
         namespace: media
   values:
     affinity:
@@ -167,7 +167,7 @@ spec:
       version: "5.2.1"
       sourceRef:
         kind: HelmRepository
-        name: prowlarr
+        name: k8s-home-lab
   values:
     affinity:
       nodeAffinity:
