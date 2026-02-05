@@ -36,7 +36,7 @@ spec:
         mountPath: /config
 
     podSecurityContext:
-      fsGroup: 1000
+      fsGroup: 100
       fsGroupChangePolicy: "OnRootMismatch"
 ---
 # Sonarr
@@ -76,7 +76,7 @@ spec:
         mountPath: /config
 
     podSecurityContext:
-      fsGroup: 1000
+      fsGroup: 100
       fsGroupChangePolicy: "OnRootMismatch"
 ---
 #Plex
@@ -179,7 +179,7 @@ spec:
                   values: [mainboy]
     # Longhorn permissions
     podSecurityContext:
-      fsGroup: 1000
+      fsGroup: 100
       fsGroupChangePolicy: "OnRootMismatch"
     persistence:
       config:
