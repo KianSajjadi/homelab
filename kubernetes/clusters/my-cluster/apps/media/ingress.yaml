@@ -39,7 +39,7 @@ spec:
   tls:
   - hosts:
     - sonarr.syd.broc.ee
-    secretName: radarr-tls
+    secretName: sonarr-tls
   rules:
   - host: sonarr.syd.broc.ee
     http:
