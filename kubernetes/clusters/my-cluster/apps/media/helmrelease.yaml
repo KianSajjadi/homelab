@@ -169,6 +169,10 @@ spec:
                 - key: kubernetes.io/hostname
                   operator: In
                   values: [mainboy]
+    # Longhorn permissions
+    podSecurityContext:
+      fsGroup: 1000
+      fsGroupChangePolicy: "OnRootMismatch"
     persistence:
       config:
         enabled: true
