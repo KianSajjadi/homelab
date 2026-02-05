@@ -11,7 +11,8 @@
     dig
     sops
     zfs
-    lsof   
+    lsof
+    sysstat
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -44,7 +45,7 @@
   users.users.kian = {
     isNormalUser = true;
     description = "kian";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "smb"];
     packages = with pkgs; [
     #  thunderbird
     ];
@@ -57,7 +58,7 @@
   users.users.sia = {
     isNormalUser = true;
     description = "Sia";
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [ "wheel" "networkmanager" "smb"];
     packages = with pkgs; [
       #etc
     ];
@@ -65,12 +66,22 @@
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBnb1wEsZL/wmWOisNeT3oEoiP0LnmEd/NVQ3RwJ4rER sia@strongbox"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGYWPtuzgxIuDlKRe4XDQdYPu9N8vAijzCe4GyW8JXxl sia@eyestrainer"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEtKqGytooa5gHF/3799sFc4zWJ96B4HZlfkjLjomDO5 sia@chafebookpr"
     ];
   };
+  users.groups.smb = {};
+  users.users.smbuser = {
+    isNormalUser = true;
+    description = "Samba user";
+    home = "/home/smbuser";
+    createHome = true;
 
+    # Groups this user belongs to
+    extraGroups = [ "users" "smb" ];
 
-
-
+    # Optional: if you want SSH or local login
+    shell = pkgs.bashInteractive;
+  };
 /* ############################### NETWORKING ############################### */
   # needed for k3s setup
   networking.firewall.allowedTCPPorts = [ 80 443 22 6443 10250 53 7912 9100 2049 ];
@@ -103,6 +114,71 @@
   services.zfs = {
     autoScrub.enable = true;
   };
+
+
+  # This is needed to make sure that ZFS ARC isn't killing all my ram
+  boot.kernelParams = [
+    "zfs_arc_max=8589934592" # 8 GiB
+  ];
+
+  boot.extraModprobeConfig = ''
+    options zfs zfs_arc_max=8589934592
+    options zfs zfs_arc_min=1073741824
+  '';
+
+  /* ################################## Samba ################################# */
+
+  services.samba = {
+    enable = true;
+
+    # Optional but strongly recommended
+    openFirewall = true;
+
+    settings = {
+      global = {
+        workgroup = "WORKGROUP";
+        serverString = "nixos-samba";
+        security = "user";
+
+        # Good defaults for modern clients
+        serverMinProtocol = "SMB2";
+        serverMaxProtocol = "SMB3";
+
+        # Performance / sanity
+        socketOptions = "TCP_NODELAY IPTOS_LOWDELAY";
+        useSendfile = "yes";
+      };
+
+      # Example share
+      media = {
+        path = "/tank/media";
+        browseable = "yes";
+        readOnly = "no";
+        guestOk = "no";
+        createMask = "0664";
+        directoryMask = "0775";
+      };
+    };
+  };
+
+  services.avahi = {
+    enable = true;
+    nssmdns = true;
+    openFirewall = true;
+  };
+  
+  /* ######################## PROMETHEUS NODE EXPORTER ######################## */
+  services.prometheus.exporters.node = {
+    enable = true;
+    port = 9100;
+    enabledCollectors = [
+      "logind"
+      "systemd"
+    ];
+    openFirewall = true;
+    firewallFilter = "-i br0 -p tcp -m tcp --dport 9100";
+  };
+
 
   boot.zfs.devNodes = "/dev/disk/by-id";
 

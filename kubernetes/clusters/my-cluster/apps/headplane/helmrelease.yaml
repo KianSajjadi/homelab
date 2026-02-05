@@ -1,0 +1,17 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: headplane
+  namespace: headplane
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: headplane
+      sourceRef:
+        kind: HelmRepository
+        name: nbcloud
+        namespace: flux-system
+  valuesFrom:
+    - kind: ConfigMap
+      name: headplane-values

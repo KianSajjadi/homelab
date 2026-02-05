@@ -30,6 +30,10 @@ spec:
         enabled: true
         existingClaim: media-nfs-pvc
         mountPath: /media
+      config:
+        enabled: true
+        existingClaim: radarr-config-pvc
+        mountPath: /config
 ---
 # Sonarr
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
@@ -62,6 +66,10 @@ spec:
         enabled: true
         existingClaim: media-nfs-pvc
         mountPath: /media
+      config:
+        enabled: true
+        existingClaim: sonarr-config-pvc
+        mountPath: /config
 ---
 #Plex
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
@@ -137,21 +145,21 @@ spec:
       download-dir: /media/downloads
       incomplete-dir-enabled: false
 ---
-# Jackett
+# Prowlarr
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: jackett
+  name: prowlarr
   namespace: media
 spec:
   interval: 30m
   chart:
     spec:
-      chart: jackett
-      version: "11.7.2"
+      chart: prowlarr
+      version: "5.2.1"
       sourceRef:
         kind: HelmRepository
-        name: jackett
+        name: prowlarr
   values:
     affinity:
       nodeAffinity:
@@ -164,5 +172,5 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: media-nfs-pvc
+        existingClaim: prowlarr-config-pvc
         mountPath: /config

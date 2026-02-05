@@ -38,3 +38,42 @@ spec:
   storageClassName: longhorn
   accessModes:
     - ReadWriteOnce
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: prowlarr-config-pvc
+  namespace: media
+spec:
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: longhorn
+  accessModes:
+    - ReadWriteOnce
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: radarr-config-pvc
+  namespace: media
+spec:
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: longhorn
+  accessModes:
+    - ReadWriteOnce
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: sonarr-config-pvc
+  namespace: media
+spec:
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: longhorn
+  accessModes:
+    - ReadWriteOnce
