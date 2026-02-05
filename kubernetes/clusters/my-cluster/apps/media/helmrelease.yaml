@@ -34,6 +34,10 @@ spec:
         enabled: true
         existingClaim: radarr-config-pvc
         mountPath: /config
+
+    podSecurityContext:
+      fsGroup: 1000
+      fsGroupChangePolicy: "OnRootMismatch"
 ---
 # Sonarr
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
@@ -70,6 +74,10 @@ spec:
         enabled: true
         existingClaim: sonarr-config-pvc
         mountPath: /config
+
+    podSecurityContext:
+      fsGroup: 1000
+      fsGroupChangePolicy: "OnRootMismatch"
 ---
 #Plex
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
