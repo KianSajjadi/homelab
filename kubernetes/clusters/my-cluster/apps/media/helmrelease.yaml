@@ -143,12 +143,17 @@ spec:
                 - key: kubernetes.io/hostname
                   operator: In
                   values: [mainboy]
+    podSecurityContext:
+      fsGroup: 100
+    env:
+      TZ: Australia/Sydney
+      PUID: "65534"
+      PGID: "100"
     persistence:
-      media:
+      downloads:
         enabled: true
+        type: pvc
         existingClaim: media-nfs-pvc
-        mountPath: /media
-
     config:
       download-dir: /media/downloads
       incomplete-dir-enabled: false
