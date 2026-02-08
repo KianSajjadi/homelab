@@ -52,6 +52,33 @@ spec:
             port:
               number: 8989
 ---
+# Prowlarr
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: prowlarr-ingress
+  namespace: media
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  ingressClassName: traefik
+  tls:
+  - hosts:
+    - prowlarr.syd.broc.ee
+    secretName: prowlarr-tls
+  rules:
+  - host: prowlarr.syd.broc.ee
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: prowlarr
+            port:
+              number: 9696
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
