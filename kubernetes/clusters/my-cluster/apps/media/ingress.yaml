@@ -96,7 +96,7 @@ spec:
   - host: transmission.syd.broc.ee
     http:
       paths:
-      - path: /
+      - path: /transmission
         pathType: Prefix
         backend:
           service:
