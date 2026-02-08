@@ -161,8 +161,9 @@ spec:
         enabled: true
         existingClaim: transmission-config-pvc
     config:
-      download-dir: /downloads/downloads
-      incomplete-dir-enabled: false
+      download-dir: /downloads/complete
+      incomplete-dir-enabled: true
+      incomplete-dir: /downloads/incomplete
     extraContainers:
       - name: gluetun
         image: ghcr.io/qdm12/gluetun:latest
