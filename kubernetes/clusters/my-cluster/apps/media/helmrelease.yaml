@@ -149,14 +149,40 @@ spec:
       TZ: Australia/Sydney
       PUID: "65534"
       PGID: "100"
+    service:
+      torrent:
+        enabled: false
     persistence:
       downloads:
         enabled: true
         type: pvc
         existingClaim: media-nfs-pvc
+      config:
+        enabled: true
+        existingClaim: transmission-config-pvc
     config:
-      download-dir: /media/downloads
+      download-dir: /downloads/downloads
       incomplete-dir-enabled: false
+    extraContainers:
+      - name: gluetun
+        image: ghcr.io/qdm12/gluetun:latest
+        securityContext:
+          capabilities:
+            add: ["NET_ADMIN"]
+        env:
+          - name: VPN_SERVICE_PROVIDER
+            value: protonvpn
+          - name: VPN_TYPE
+            value: wireguard
+          - name: WIREGUARD_PRIVATE_KEY
+            valueFrom:
+              secretKeyRef:
+                name: protonvpn-wg
+                key: privatekey
+          - name: FIREWALL
+            value: "on"
+          - name: FIREWALL_INPUT_PORTS
+            value: "9091"
 ---
 # Prowlarr
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
