@@ -237,7 +237,7 @@ spec:
           - name: WIREGUARD_MTU
             value: "1320"
           - name: WIREGUARD_PERSISTENT_KEEPALIVE_INTERVAL
-            value: "25"
+            value: "15s"
       - name: port-updater
         image: curlimages/curl:latest
         command:
