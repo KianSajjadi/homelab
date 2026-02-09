@@ -303,30 +303,30 @@ spec:
             if [ ! -f /config/settings.json ]; then
               cat > /config/settings.json << 'ENDJSON'
             {
-              "download_dir": "/downloads/downloads/complete",
-              "incomplete_dir_enabled": true,
-              "incomplete_dir": "/downloads/downloads/incomplete",
-              "watch_dir_enabled": true,
-              "watch_dir": "/downloads/downloads/watch",
-              "peer_port_random_on_start": false,
-              "port_forwarding_enabled": false,
-              "pex_enabled": false,
-              "dht_enabled": false,
-              "rpc_authentication_required": false
+              "download-dir": "/downloads/downloads/complete",
+              "incomplete-dir-enabled": true,
+              "incomplete-dir": "/downloads/downloads/incomplete",
+              "watch-dir-enabled": true,
+              "watch-dir": "/downloads/downloads/watch",
+              "peer-port-random-on-start": false,
+              "port-forwarding-enabled": false,
+              "pex-enabled": false,
+              "dht-enabled": false,
+              "lpd-enabled": false,
+              "rpc-authentication-required": false,
+              "rpc-host-whitelist-enabled": false,
+              "rpc-whitelist-enabled": false,
+              "utp-enabled": false
             }
             ENDJSON
             fi
             # Open permissions first so we can modify the file
             chmod 666 /config/settings.json
-            # Ensure critical settings are correct (handle both 3.x dashes and 4.x underscores)
+            # Ensure critical settings are correct in existing config
             sed -i 's/"peer-port-random-on-start": true/"peer-port-random-on-start": false/' /config/settings.json
-            sed -i 's/"peer_port_random_on_start": true/"peer_port_random_on_start": false/' /config/settings.json
             sed -i 's/"port-forwarding-enabled": true/"port-forwarding-enabled": false/' /config/settings.json
-            sed -i 's/"port_forwarding_enabled": true/"port_forwarding_enabled": false/' /config/settings.json
             sed -i 's/"pex-enabled": true/"pex-enabled": false/' /config/settings.json
-            sed -i 's/"pex_enabled": true/"pex_enabled": false/' /config/settings.json
             sed -i 's/"dht-enabled": true/"dht-enabled": false/' /config/settings.json
-            sed -i 's/"dht_enabled": true/"dht_enabled": false/' /config/settings.json
             # Set ownership to PUID/PGID that linuxserver will use
             chown -R 1000:1000 /config
             chmod 2775 /config
