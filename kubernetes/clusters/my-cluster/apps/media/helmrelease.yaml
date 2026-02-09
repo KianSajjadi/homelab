@@ -164,11 +164,11 @@ spec:
         existingClaim: transmission-config-pvc
         mountPath: /config
     config:
-      download-dir: /downloads/downloads/complete
+      download-dir: /downloads/complete
       incomplete-dir-enabled: true
-      incomplete-dir: /downloads/downloads/incomplete
+      incomplete-dir: /downloads/incomplete
       watch-dir-enabled: true
-      watch-dir: /downloads/downloads/watch
+      watch-dir: /downloads/watch
     extraContainers:
       - name: gluetun
         image: ghcr.io/qdm12/gluetun:latest
