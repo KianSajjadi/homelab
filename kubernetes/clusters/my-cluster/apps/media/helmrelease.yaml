@@ -136,12 +136,12 @@ spec:
         name: lexfrei-charts
   values:
     livenessProbe:
-      fsCheckPath: "/config"  # Use /config instead of /downloads since it's writable (Longhorn PVC)
+      fsCheckPath: "/config"
       initialDelaySeconds: 90
       periodSeconds: 30
       timeoutSeconds: 10
       failureThreshold: 6
-      runAsUser: "abc"
+      runAsUser: "1000"
 
     readinessProbe:
       initialDelaySeconds: 90
@@ -256,9 +256,8 @@ spec:
             fi
             # Fix all permissions
             chown -R 1000:1000 /config
-            chmod 1777 /config  # Sticky bit + world writable for healthcheck
+            chmod 2775 /config
             chmod -R u+rwX,g+rwX /config
-            chmod 644 /config/settings.json
         volumeMounts:
           - name: config
             mountPath: /config
