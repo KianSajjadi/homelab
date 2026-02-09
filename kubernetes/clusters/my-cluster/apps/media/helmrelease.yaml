@@ -237,27 +237,34 @@ spec:
           - sh
           - -c
           - |
+            get_sid() {
+              curl -s -D /tmp/headers http://localhost:9091/transmission/rpc/ -o /dev/null 2>/dev/null
+              sed -n 's/.*X-Transmission-Session-Id: *\([^ ]*\).*/\1/p' /tmp/headers | tr -d '\r\n '
+            }
             sleep 60
             LAST_PORT=""
             while true; do
               if [ -f /tmp/gluetun/forwarded_port ]; then
                 PORT=$(cat /tmp/gluetun/forwarded_port | tr -d '[:space:]')
                 if [ -n "$PORT" ] && [ "$PORT" != "$LAST_PORT" ]; then
-                  SID=$(curl -s -D - http://localhost:9091/transmission/rpc/ 2>/dev/null | grep -i X-Transmission-Session-Id | tr -d '\r' | awk '{print $2}')
+                  SID=$(get_sid)
+                  echo "Got SID: [$SID] for port $PORT"
                   if [ -n "$SID" ]; then
-                    RESULT=$(curl -s http://localhost:9091/transmission/rpc/ \
+                    RESULT=$(curl -s -w "\nHTTP_CODE:%{http_code}" \
+                      http://localhost:9091/transmission/rpc/ \
                       -H "X-Transmission-Session-Id: $SID" \
-                      -d '{"method":"session-set","arguments":{"peer-port":'"$PORT"',"port-forwarding-enabled":false}}')
-                    echo "Set port result: $RESULT"
-                    VERIFY=$(curl -s http://localhost:9091/transmission/rpc/ \
+                      -d "{\"method\":\"session-set\",\"arguments\":{\"peer-port\":$PORT,\"port-forwarding-enabled\":false}}")
+                    echo "Set result: $RESULT"
+                    VERIFY=$(curl -s \
+                      http://localhost:9091/transmission/rpc/ \
                       -H "X-Transmission-Session-Id: $SID" \
-                      -d '{"method":"session-get","arguments":{"fields":["peer-port"]}}')
+                      -d "{\"method\":\"session-get\",\"arguments\":{\"fields\":[\"peer-port\"]}}")
                     ACTUAL=$(echo "$VERIFY" | grep -o '"peer-port":[0-9]*' | grep -o '[0-9]*')
                     if [ "$ACTUAL" = "$PORT" ]; then
                       echo "Verified: peer-port is $ACTUAL"
                       LAST_PORT=$PORT
                     else
-                      echo "MISMATCH: wanted $PORT but got $ACTUAL, will retry"
+                      echo "MISMATCH: wanted $PORT got $ACTUAL, will retry"
                     fi
                   else
                     echo "Failed to get session ID"
