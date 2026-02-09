@@ -5,4 +5,5 @@ resources:
   - helmrepo.yaml
   - volumes.yaml
   - svc.yaml
+  - overseerr.yaml
   - ocirepo.yaml
