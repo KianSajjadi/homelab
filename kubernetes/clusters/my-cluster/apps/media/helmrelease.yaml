@@ -181,7 +181,10 @@ spec:
           - name: VPN_TYPE
             value: wireguard
           - name: WIREGUARD_CONF_SECRETFILE
-            value: /secrets/wg.conf
+            valueFrom:
+              secretKeyRef:
+                name: protonvpn-wg
+                key: privatekey
           - name: OPENVPN_USER
             valueFrom:
               secretKeyRef:
