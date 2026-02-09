@@ -136,17 +136,32 @@ spec:
         name: lexfrei-charts
   values:
     livenessProbe:
-      fsCheckPath: /config
-      initialDelaySeconds: 60
-      timeoutSeconds: 15
-      periodSeconds: 10
-      failureThreshold: 6
+      enabled: true
+      custom: true
+      spec:
+        exec:
+          command:
+            - sh
+            - -c
+            - test -f /config/settings.json
+        initialDelaySeconds: 60
+        timeoutSeconds: 5
+        periodSeconds: 10
+        failureThreshold: 6
 
     readinessProbe:
-      initialDelaySeconds: 30
-      timeoutSeconds: 10
-      periodSeconds: 10
-      failureThreshold: 6
+      enabled: true
+      custom: true
+      spec:
+        exec:
+          command:
+            - sh
+            - -c
+            - wget -q --spider --timeout=5 http://localhost:9091/transmission/web/ || exit 1
+        initialDelaySeconds: 30
+        timeoutSeconds: 10
+        periodSeconds: 10
+        failureThreshold: 6
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
