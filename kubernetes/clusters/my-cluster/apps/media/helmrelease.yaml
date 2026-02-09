@@ -135,6 +135,8 @@ spec:
         kind: HelmRepository
         name: lexfrei-charts
   values:
+    livenessProbe:
+      fsCheckPath: /downloads/downloads
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
@@ -144,7 +146,7 @@ spec:
                   operator: In
                   values: [mainboy]
     podSecurityContext:
-      fsGroup: 1000
+      fsGroup: 1000 
       fsGroupChangePolicy: "OnRootMismatch"
     env:
       TZ: Australia/Sydney
