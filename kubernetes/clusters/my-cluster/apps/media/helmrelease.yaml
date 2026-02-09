@@ -222,12 +222,8 @@ spec:
                 key: password
           - name: WIREGUARD_ADDRESSES
             value: "10.2.0.2/32"
-          - name: WIREGUARD_PUBLIC_KEY
-            value: "enwR3M+w4F/8bBPz85kf46hh/dVSmQfeoQnECaLo1lo="
-          - name: WIREGUARD_ENDPOINT_IP
-            value: "144.48.38.178"
-          - name: WIREGUARD_ENDPOINT_PORT
-            value: "51820"
+          - name: SERVER_COUNTRIES
+            value: "Australia"
           - name: FIREWALL
             value: "on"
           - name: FIREWALL_INPUT_PORTS
