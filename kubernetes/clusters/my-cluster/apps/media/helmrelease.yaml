@@ -164,7 +164,7 @@ spec:
       PGID: "1000"
     service:
       torrent:
-        enabled: false
+        enabled: true
     persistence:
       downloads:
         enabled: true
