@@ -195,6 +195,17 @@ spec:
               secretKeyRef:
                 name: protonvpn-credentials
                 key: password
+          - name: VPN_PORT_FORWARDING_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: protonvpn-credentials
+                key: username_pmp
+
+          - name: VPN_PORT_FORWARDING_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: protonvpn-credentials
+                key: password
           - name: FIREWALL
             value: "on"
           - name: FIREWALL_INPUT_PORTS
