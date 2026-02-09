@@ -134,21 +134,18 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: lexfrei-charts
+  postRenderers:
+    - kustomize:
+        patches:
+          - target:
+              kind: StatefulSet
+              name: transmission
+            patch: |
+              - op: remove
+                path: /spec/template/spec/containers/0/livenessProbe
+              - op: remove
+                path: /spec/template/spec/containers/0/readinessProbe
   values:
-    livenessProbe:
-      fsCheckPath: "/config"
-      initialDelaySeconds: 90
-      periodSeconds: 30
-      timeoutSeconds: 10
-      failureThreshold: 6
-      runAsUser: "1000"
-
-    readinessProbe:
-      initialDelaySeconds: 90
-      periodSeconds: 30
-      timeoutSeconds: 10
-      failureThreshold: 6
-
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
@@ -258,6 +255,7 @@ spec:
             chown -R 1000:1000 /config
             chmod 2775 /config
             chmod -R u+rwX,g+rwX /config
+            chmod 666 /config/settings.json
         volumeMounts:
           - name: config
             mountPath: /config
