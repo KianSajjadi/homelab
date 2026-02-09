@@ -220,6 +220,14 @@ spec:
               secretKeyRef:
                 name: protonvpn-credentials
                 key: password
+          - name: WIREGUARD_ADDRESSES
+            value: "10.2.0.2/32"
+          - name: WIREGUARD_PUBLIC_KEY
+            value: "enwR3M+w4F/8bBPz85kf46hh/dVSmQfeoQnECaLo1lo="
+          - name: WIREGUARD_ENDPOINT_IP
+            value: "144.48.38.178"
+          - name: WIREGUARD_ENDPOINT_PORT
+            value: "51820"
           - name: FIREWALL
             value: "on"
           - name: FIREWALL_INPUT_PORTS
@@ -238,20 +246,18 @@ spec:
           - sh
           - -c
           - |
+            sleep 60
             LAST_PORT=""
             while true; do
               if [ -f /tmp/gluetun/forwarded_port ]; then
-                PORT=$(cat /tmp/gluetun/forwarded_port)
+                PORT=$(cat /tmp/gluetun/forwarded_port | tr -d '[:space:]')
                 if [ -n "$PORT" ] && [ "$PORT" != "$LAST_PORT" ]; then
-                  echo "Updating Transmission peer port to $PORT"
-                  # Get CSRF session ID
                   SID=$(curl -s -D - http://localhost:9091/transmission/rpc/ 2>/dev/null | grep -i X-Transmission-Session-Id | tr -d '\r' | awk '{print $2}')
                   if [ -n "$SID" ]; then
                     curl -s http://localhost:9091/transmission/rpc/ \
                       -H "X-Transmission-Session-Id: $SID" \
-                      -d '{"method":"session-set","arguments":{"peer-port":'"$PORT"'}}' \
-                      && echo "Port updated to $PORT" \
-                      || echo "Failed to update port"
+                      -d '{"method":"session-set","arguments":{"peer-port":'"$PORT"'}}' > /dev/null
+                    echo "Port updated to $PORT"
                   fi
                   LAST_PORT=$PORT
                 fi
