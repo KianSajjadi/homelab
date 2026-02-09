@@ -144,7 +144,7 @@ spec:
                   operator: In
                   values: [mainboy]
     podSecurityContext:
-      fsGroup: 100
+      fsGroup: 1000
       fsGroupChangePolicy: "OnRootMismatch"
     env:
       TZ: Australia/Sydney
