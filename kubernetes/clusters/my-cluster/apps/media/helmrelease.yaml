@@ -135,6 +135,20 @@ spec:
         kind: HelmRepository
         name: lexfrei-charts
   values:
+    livenessProbe:
+      fsCheckPath: "/config"  # Use /config instead of /downloads since it's writable (Longhorn PVC)
+      initialDelaySeconds: 90
+      periodSeconds: 30
+      timeoutSeconds: 10
+      failureThreshold: 6
+      runAsUser: "abc"
+
+    readinessProbe:
+      initialDelaySeconds: 90
+      periodSeconds: 30
+      timeoutSeconds: 10
+      failureThreshold: 6
+
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
