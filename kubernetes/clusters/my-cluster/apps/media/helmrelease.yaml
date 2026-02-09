@@ -161,7 +161,6 @@ spec:
       TZ: Australia/Sydney
       PUID: "1000"
       PGID: "1000"
-      TRANSMISSION_WATCH_DIR: /downloads/downloads/watch
     service:
       torrent:
         enabled: true
@@ -175,12 +174,6 @@ spec:
         enabled: true
         existingClaim: transmission-config-pvc
         mountPath: /config
-    config:
-      download-dir: /downloads/downloads/complete
-      incomplete-dir-enabled: true
-      incomplete-dir: /downloads/downloads/incomplete
-      watch-dir-enabled: true
-      watch-dir: /downloads/downloads/watch
     extraContainers:
       - name: gluetun
         image: ghcr.io/qdm12/gluetun:latest
@@ -252,12 +245,23 @@ spec:
                 if [ -n "$PORT" ] && [ "$PORT" != "$LAST_PORT" ]; then
                   SID=$(curl -s -D - http://localhost:9091/transmission/rpc/ 2>/dev/null | grep -i X-Transmission-Session-Id | tr -d '\r' | awk '{print $2}')
                   if [ -n "$SID" ]; then
-                    curl -s http://localhost:9091/transmission/rpc/ \
+                    RESULT=$(curl -s http://localhost:9091/transmission/rpc/ \
                       -H "X-Transmission-Session-Id: $SID" \
-                      -d '{"method":"session-set","arguments":{"peer-port":'"$PORT"'}}' > /dev/null
-                    echo "Port updated to $PORT"
+                      -d '{"method":"session-set","arguments":{"peer-port":'"$PORT"',"port-forwarding-enabled":false}}')
+                    echo "Set port result: $RESULT"
+                    VERIFY=$(curl -s http://localhost:9091/transmission/rpc/ \
+                      -H "X-Transmission-Session-Id: $SID" \
+                      -d '{"method":"session-get","arguments":{"fields":["peer-port"]}}')
+                    ACTUAL=$(echo "$VERIFY" | grep -o '"peer-port":[0-9]*' | grep -o '[0-9]*')
+                    if [ "$ACTUAL" = "$PORT" ]; then
+                      echo "Verified: peer-port is $ACTUAL"
+                      LAST_PORT=$PORT
+                    else
+                      echo "MISMATCH: wanted $PORT but got $ACTUAL, will retry"
+                    fi
+                  else
+                    echo "Failed to get session ID"
                   fi
-                  LAST_PORT=$PORT
                 fi
               fi
               sleep 30
@@ -288,10 +292,25 @@ spec:
           - -c
           - |
             set -eux
-            # Create settings.json if it doesn't exist
+            # Create settings.json with correct defaults if it doesn't exist
             if [ ! -f /config/settings.json ]; then
-              echo '{}' > /config/settings.json
+              cat > /config/settings.json << 'EOF'
+            {
+              "download-dir": "/downloads/downloads/complete",
+              "incomplete-dir-enabled": true,
+              "incomplete-dir": "/downloads/downloads/incomplete",
+              "watch-dir-enabled": true,
+              "watch-dir": "/downloads/downloads/watch",
+              "peer-port-random-on-start": false,
+              "port-forwarding-enabled": false,
+              "rpc-authentication-required": false
+            }
+            EOF
             fi
+            # Ensure critical settings are correct even if settings.json already exists
+            # Use sed since busybox doesn't have jq
+            sed -i 's/"peer-port-random-on-start": true/"peer-port-random-on-start": false/' /config/settings.json
+            sed -i 's/"port-forwarding-enabled": true/"port-forwarding-enabled": false/' /config/settings.json
             # Fix all permissions
             chown -R 1000:1000 /config
             chmod 2775 /config
