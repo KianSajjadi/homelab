@@ -146,6 +146,10 @@ spec:
     podSecurityContext:
       fsGroup: 1000
       fsGroupChangePolicy: "OnRootMismatch"
+    securityContext:
+      runAsUser: 1000
+      runAsGroup: 1000
+      allowPrivilegeEscalation: false
     env:
       TZ: Australia/Sydney
       PUID: "1000"
@@ -158,9 +162,11 @@ spec:
         enabled: true
         type: pvc
         existingClaim: media-nfs-pvc
+        mountPath: /downloads
       config:
         enabled: true
         existingClaim: transmission-config-pvc
+        mountPath: /config
     config:
       download-dir: /downloads/downloads/complete
       incomplete-dir-enabled: true
@@ -187,7 +193,7 @@ spec:
             value: "on"
           - name: FIREWALL_INPUT_PORTS
             value: "9091"
-          - name: FIREWALL_OUTBOUD_SUBNETS
+          - name: FIREWALL_OUTBOUND_SUBNETS
             value: "10.42.0.0/16,10.43.0.0/16,192.168.0.0/16"
           - name: VPN_PORT_FORWARDING
             value: "on"
