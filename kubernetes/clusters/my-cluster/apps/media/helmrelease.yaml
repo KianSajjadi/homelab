@@ -253,7 +253,7 @@ spec:
                     RESULT=$(curl -s -w "\nHTTP_CODE:%{http_code}" \
                       http://localhost:9091/transmission/rpc/ \
                       -H "X-Transmission-Session-Id: $SID" \
-                      -d "{\"method\":\"session-set\",\"arguments\":{\"peer-port\":$PORT,\"port-forwarding-enabled\":false}}")
+                      -d "{\"method\":\"session-set\",\"arguments\":{\"peer-port\":$PORT,\"port-forwarding-enabled\":false,\"dht-enabled\":false,\"pex-enabled\":false}}")
                     echo "Set result: $RESULT"
                     VERIFY=$(curl -s \
                       http://localhost:9091/transmission/rpc/ \
@@ -301,28 +301,41 @@ spec:
             set -eux
             # Create settings.json with correct defaults if it doesn't exist
             if [ ! -f /config/settings.json ]; then
-              cat > /config/settings.json << 'EOF'
+              cat > /config/settings.json << 'ENDJSON'
             {
-              "download-dir": "/downloads/downloads/complete",
-              "incomplete-dir-enabled": true,
-              "incomplete-dir": "/downloads/downloads/incomplete",
-              "watch-dir-enabled": true,
-              "watch-dir": "/downloads/downloads/watch",
-              "peer-port-random-on-start": false,
-              "port-forwarding-enabled": false,
-              "rpc-authentication-required": false
+              "download_dir": "/downloads/downloads/complete",
+              "incomplete_dir_enabled": true,
+              "incomplete_dir": "/downloads/downloads/incomplete",
+              "watch_dir_enabled": true,
+              "watch_dir": "/downloads/downloads/watch",
+              "peer_port_random_on_start": false,
+              "port_forwarding_enabled": false,
+              "pex_enabled": false,
+              "dht_enabled": false,
+              "rpc_authentication_required": false
             }
-            EOF
+            ENDJSON
             fi
-            # Ensure critical settings are correct even if settings.json already exists
-            # Use sed since busybox doesn't have jq
+            # Open permissions first so we can modify the file
+            chmod 666 /config/settings.json
+            # Ensure critical settings are correct (handle both 3.x dashes and 4.x underscores)
             sed -i 's/"peer-port-random-on-start": true/"peer-port-random-on-start": false/' /config/settings.json
+            sed -i 's/"peer_port_random_on_start": true/"peer_port_random_on_start": false/' /config/settings.json
             sed -i 's/"port-forwarding-enabled": true/"port-forwarding-enabled": false/' /config/settings.json
-            # Fix all permissions
+            sed -i 's/"port_forwarding_enabled": true/"port_forwarding_enabled": false/' /config/settings.json
+            sed -i 's/"pex-enabled": true/"pex-enabled": false/' /config/settings.json
+            sed -i 's/"pex_enabled": true/"pex_enabled": false/' /config/settings.json
+            sed -i 's/"dht-enabled": true/"dht-enabled": false/' /config/settings.json
+            sed -i 's/"dht_enabled": true/"dht_enabled": false/' /config/settings.json
+            # Set ownership to PUID/PGID that linuxserver will use
             chown -R 1000:1000 /config
             chmod 2775 /config
-            chmod -R u+rwX,g+rwX /config
+            chmod -R u+rwX,g+rwX,o+r /config
+            # settings.json must be world-rw so it survives s6-overlay uid remapping
             chmod 666 /config/settings.json
+            cat /config/settings.json
+            echo "Init complete, settings.json permissions:"
+            ls -la /config/settings.json
         volumeMounts:
           - name: config
             mountPath: /config
