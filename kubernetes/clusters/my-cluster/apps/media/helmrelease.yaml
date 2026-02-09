@@ -144,11 +144,11 @@ spec:
                   operator: In
                   values: [mainboy]
     podSecurityContext:
-      fsGroup: 100
+      fsGroup: 1000
     env:
       TZ: Australia/Sydney
-      PUID: "65534"
-      PGID: "100"
+      PUID: "1000"
+      PGID: "1000"
     service:
       torrent:
         enabled: false
