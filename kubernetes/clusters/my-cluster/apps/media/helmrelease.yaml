@@ -180,7 +180,7 @@ spec:
             value: protonvpn
           - name: VPN_TYPE
             value: wireguard
-          - name: WIREGUARD_CONF_SECRETFILE
+          - name: WIREGUARD_PRIVATE_KEY
             valueFrom:
               secretKeyRef:
                 name: protonvpn-wg
