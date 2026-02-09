@@ -180,11 +180,8 @@ spec:
             value: protonvpn
           - name: VPN_TYPE
             value: wireguard
-          - name: WIREGUARD_PRIVATE_KEY
-            valueFrom:
-              secretKeyRef:
-                name: protonvpn-wg
-                key: privatekey
+          - name: WIREGUARD_CONF_SECRETFILE
+            value: /secrets/wg.conf
           - name: OPENVPN_USER
             valueFrom:
               secretKeyRef:
@@ -200,7 +197,6 @@ spec:
               secretKeyRef:
                 name: protonvpn-credentials
                 key: username_pmp
-
           - name: VPN_PORT_FORWARDING_PASSWORD
             valueFrom:
               secretKeyRef:
@@ -218,6 +214,15 @@ spec:
             value: "on"
           - name: WIREGUARD_MTU
             value: "1320"
+    extraVolumes:
+      - name: protonvpn-wg
+        secret:
+          secretName: protonvpn-wg
+    extraVolumeMounts:
+      - name: protonvpn-wg
+        mountPath: /secrets
+        readOnly: true
+
 ---
 # Prowlarr
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
