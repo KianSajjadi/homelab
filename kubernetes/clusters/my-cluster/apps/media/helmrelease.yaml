@@ -157,9 +157,9 @@ spec:
           command:
             - sh
             - -c
-            - wget -q --spider --timeout=5 http://localhost:9091/transmission/web/ || exit 1
-        initialDelaySeconds: 30
-        timeoutSeconds: 10
+            - pgrep -x transmission-da > /dev/null
+        initialDelaySeconds: 60
+        timeoutSeconds: 5
         periodSeconds: 10
         failureThreshold: 6
     affinity:
@@ -177,6 +177,7 @@ spec:
       TZ: Australia/Sydney
       PUID: "1000"
       PGID: "1000"
+      TRANSMISSION_WATCH_DIR: /downloads/downloads/watch
     service:
       torrent:
         enabled: true
@@ -262,9 +263,15 @@ spec:
           - -c
           - |
             set -eux
+            # Create settings.json if it doesn't exist
+            if [ ! -f /config/settings.json ]; then
+              echo '{}' > /config/settings.json
+            fi
+            # Fix all permissions
             chown -R 1000:1000 /config
             chmod 2775 /config
             chmod -R u+rwX,g+rwX /config
+            chmod 644 /config/settings.json
         volumeMounts:
           - name: config
             mountPath: /config
