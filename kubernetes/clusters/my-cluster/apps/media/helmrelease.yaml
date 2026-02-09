@@ -135,18 +135,6 @@ spec:
         kind: HelmRepository
         name: lexfrei-charts
   values:
-    livenessProbe:
-      fsCheckPath: ""  # Disable filesystem check since NFS is read-only for healthchecks
-      initialDelaySeconds: 60
-      periodSeconds: 30
-      timeoutSeconds: 10
-      failureThreshold: 6
-
-    readinessProbe:
-      initialDelaySeconds: 60
-      periodSeconds: 30
-      timeoutSeconds: 10
-      failureThreshold: 6
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
