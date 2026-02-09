@@ -185,6 +185,16 @@ spec:
               secretKeyRef:
                 name: protonvpn-wg
                 key: privatekey
+          - name: OPENVPN_USER
+            valueFrom:
+              secretKeyRef:
+                name: protonvpn-credentials
+                key: username_pmp
+          - name: OPENVPN_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: protonvpn-credentials
+                key: password
           - name: FIREWALL
             value: "on"
           - name: FIREWALL_INPUT_PORTS
