@@ -170,6 +170,7 @@ spec:
         type: pvc
         existingClaim: media-nfs-pvc
         mountPath: /downloads
+        subPath: downloads
       config:
         enabled: true
         existingClaim: transmission-config-pvc
@@ -303,11 +304,11 @@ spec:
             if [ ! -f /config/settings.json ]; then
               cat > /config/settings.json << 'ENDJSON'
             {
-              "download-dir": "/downloads/downloads/complete",
+              "download-dir": "/downloads/complete",
               "incomplete-dir-enabled": true,
-              "incomplete-dir": "/downloads/downloads/incomplete",
+              "incomplete-dir": "/downloads/incomplete",
               "watch-dir-enabled": true,
-              "watch-dir": "/downloads/downloads/watch",
+              "watch-dir": "/downloads/watch",
               "peer-port-random-on-start": false,
               "port-forwarding-enabled": false,
               "pex-enabled": false,
@@ -327,6 +328,7 @@ spec:
             sed -i 's/"port-forwarding-enabled": true/"port-forwarding-enabled": false/' /config/settings.json
             sed -i 's/"pex-enabled": true/"pex-enabled": false/' /config/settings.json
             sed -i 's/"dht-enabled": true/"dht-enabled": false/' /config/settings.json
+            sed -i 's|/downloads/downloads/|/downloads/|g' /config/settings.json
             # Set ownership to PUID/PGID that linuxserver will use
             chown -R 1000:1000 /config
             chmod 2775 /config

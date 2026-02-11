@@ -48,6 +48,21 @@
     ];
   };
 
+  users.users.sia = {
+    isNormalUser = true;
+    description = "Sia";
+    extraGroups = [ "wheel" "networkmanager" "smb"];
+    packages = with pkgs; [
+      #etc
+    ];
+
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBnb1wEsZL/wmWOisNeT3oEoiP0LnmEd/NVQ3RwJ4rER sia@strongbox"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGYWPtuzgxIuDlKRe4XDQdYPu9N8vAijzCe4GyW8JXxl sia@eyestrainer"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEtKqGytooa5gHF/3799sFc4zWJ96B4HZlfkjLjomDO5 sia@chafebookpro"
+    ];
+  };
+
   nix.settings.auto-optimise-store = true;
 
 /* ############################### NETWORKING ############################### */

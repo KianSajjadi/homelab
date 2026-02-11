@@ -9,7 +9,7 @@ while true; do
 
   line=$(curl -k -sS -m 2 -o /dev/null \
     -w "dns=%{time_namelookup} connect=%{time_connect} tls=%{time_appconnect} ttfb=%{time_starttransfer} total=%{time_total} code=%{http_code} ip=%{remote_ip}" \
-    https://printer.syd.broc.ee/robots.txt 2>/dev/null || echo FAIL)
+    https://printer .syd.broc.ee/robots.txt 2>/dev/null || echo FAIL)
 
   # If curl totally failed
   if [[ "$line" == "FAIL" ]]; then

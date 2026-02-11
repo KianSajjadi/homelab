@@ -66,7 +66,7 @@
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBnb1wEsZL/wmWOisNeT3oEoiP0LnmEd/NVQ3RwJ4rER sia@strongbox"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGYWPtuzgxIuDlKRe4XDQdYPu9N8vAijzCe4GyW8JXxl sia@eyestrainer"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEtKqGytooa5gHF/3799sFc4zWJ96B4HZlfkjLjomDO5 sia@chafebookpr"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEtKqGytooa5gHF/3799sFc4zWJ96B4HZlfkjLjomDO5 sia@chafebookpro"
     ];
   };
   users.groups.smb = {};
