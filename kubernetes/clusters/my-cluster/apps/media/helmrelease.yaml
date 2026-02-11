@@ -376,3 +376,147 @@ spec:
         enabled: true
         existingClaim: prowlarr-config-pvc
         mountPath: /config
+
+---
+# qBittorrent
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: qbittorrent
+  namespace: media
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: qbittorrent
+      version: "14.2.1"
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-home-lab
+  values:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values: [mainboy]
+    podSecurityContext:
+      fsGroup: 1000
+      fsGroupChangePolicy: "OnRootMismatch"
+    env:
+      TZ: Australia/Sydney
+    service:
+      bittorrent:
+        enabled: true
+    persistence:
+      downloads:
+        enabled: true
+        type: pvc
+        existingClaim: media-nfs-pvc
+        mountPath: /downloads
+        subPath: downloads
+      config:
+        enabled: true
+        existingClaim: qbittorrent-config-pvc
+        mountPath: /config
+    extraContainers:
+      - name: gluetun
+        image: ghcr.io/qdm12/gluetun:latest
+        securityContext:
+          capabilities:
+            add: ["NET_ADMIN", "NET_RAW"]
+        volumeMounts:
+          - name: gluetun-shared
+            mountPath: /tmp/gluetun
+        env:
+          - name: VPN_SERVICE_PROVIDER
+            value: protonvpn
+          - name: VPN_TYPE
+            value: wireguard
+          - name: WIREGUARD_PRIVATE_KEY
+            valueFrom:
+              secretKeyRef:
+                name: protonvpn-wg
+                key: privatekey
+          - name: OPENVPN_USER
+            valueFrom:
+              secretKeyRef:
+                name: protonvpn-credentials
+                key: username_pmp
+          - name: OPENVPN_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: protonvpn-credentials
+                key: password
+          - name: VPN_PORT_FORWARDING_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: protonvpn-credentials
+                key: username_pmp
+          - name: VPN_PORT_FORWARDING_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: protonvpn-credentials
+                key: password
+          - name: WIREGUARD_ADDRESSES
+            value: "10.2.0.2/32"
+          - name: SERVER_COUNTRIES
+            value: "Australia"
+          - name: FIREWALL
+            value: "on"
+          - name: FIREWALL_INPUT_PORTS
+            value: "8080"
+          - name: FIREWALL_OUTBOUND_SUBNETS
+            value: "10.42.0.0/16,10.43.0.0/16,192.168.0.0/16"
+          - name: VPN_PORT_FORWARDING
+            value: "on"
+          - name: PORT_FORWARD_ONLY
+            value: "on"
+          - name: WIREGUARD_MTU
+            value: "1320"
+          - name: WIREGUARD_PERSISTENT_KEEPALIVE_INTERVAL
+            value: "15s"
+      - name: port-updater
+        image: curlimages/curl:latest
+        command:
+          - sh
+          - -c
+          - |
+            get_cookie() {
+              curl -s -c /tmp/cookies.txt \
+                -d "username=admin&password=adminadmin" \
+                http://localhost:8080/api/v2/auth/login -o /dev/null 2>/dev/null
+            }
+            sleep 60
+            LAST_PORT=""
+            while true; do
+              if [ -f /tmp/gluetun/forwarded_port ]; then
+                PORT=$(cat /tmp/gluetun/forwarded_port | tr -d '[:space:]')
+                if [ -n "$PORT" ] && [ "$PORT" != "$LAST_PORT" ]; then
+                  get_cookie
+                  RESULT=$(curl -s -w "\nHTTP_CODE:%{http_code}" \
+                    -b /tmp/cookies.txt \
+                    http://localhost:8080/api/v2/app/setPreferences \
+                    -d "json={\"listen_port\":$PORT,\"dht\":false,\"pex\":false,\"lsd\":false,\"upnp\":false}")
+                  echo "Set port result: $RESULT"
+                  VERIFY=$(curl -s -b /tmp/cookies.txt \
+                    http://localhost:8080/api/v2/app/preferences)
+                  ACTUAL=$(echo "$VERIFY" | grep -o '"listen_port":[0-9]*' | grep -o '[0-9]*')
+                  if [ "$ACTUAL" = "$PORT" ]; then
+                    echo "Verified: listen_port is $ACTUAL"
+                    LAST_PORT=$PORT
+                  else
+                    echo "MISMATCH: wanted $PORT got $ACTUAL, will retry"
+                  fi
+                fi
+              fi
+              sleep 30
+            done
+        volumeMounts:
+          - name: gluetun-shared
+            mountPath: /tmp/gluetun
+    extraVolumes:
+      - name: gluetun-shared
+        emptyDir: {}
