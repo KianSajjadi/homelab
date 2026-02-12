@@ -30,6 +30,11 @@ spec:
         enabled: true
         existingClaim: media-nfs-pvc
         mountPath: /media
+      downloads:
+        enabled: true
+        existingClaim: media-nfs-pvc
+        mountPath: /downloads
+        subPath: downloads
       config:
         enabled: true
         existingClaim: radarr-config-pvc
