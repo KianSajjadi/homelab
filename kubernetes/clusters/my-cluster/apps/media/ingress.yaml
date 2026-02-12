@@ -105,32 +105,6 @@ spec:
             port:
               number: 32400
 ---
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: transmission-ingress
-  namespace: media
-  annotations:
-    traefik.ingress.kubernetes.io/router.entrypoints: websecure
-    cert-manager.io/cluster-issuer: letsencrypt
-spec:
-  ingressClassName: traefik
-  tls:
-  - hosts:
-    - transmission.syd.broc.ee
-    secretName: transmission-tls
-  rules:
-  - host: transmission.syd.broc.ee
-    http:
-      paths:
-      - path: /transmission
-        pathType: Prefix
-        backend:
-          service:
-            name: transmission
-            port:
-              number: 9091
----
 # Overseerr
 apiVersion: networking.k8s.io/v1
 kind: Ingress
