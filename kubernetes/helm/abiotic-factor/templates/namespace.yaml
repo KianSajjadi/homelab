@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ .Chart.Name }}
+  labels:
+    name: {{ .Chart.Name }}
+

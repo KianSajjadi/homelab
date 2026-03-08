@@ -1,0 +1,11 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: abiotic-factor
+  namespace: abiotic-factor
+spec:
+  interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: abiotic-factor
+    namespace: flux-system
