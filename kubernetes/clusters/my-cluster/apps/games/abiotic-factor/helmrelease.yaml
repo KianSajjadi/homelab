@@ -9,3 +9,6 @@ spec:
     kind: OCIRepository
     name: abiotic-factor
     namespace: flux-system
+  values:
+    imagePullSecret:
+      - name: github_token

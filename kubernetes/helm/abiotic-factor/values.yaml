@@ -38,3 +38,6 @@ resources:
     memory: 4Gi
 
 preferredNode: homelab-node-0
+
+# list of secrets
+imagePullSecret: ""

@@ -8,3 +8,5 @@ spec:
   url: oci://ghcr.io/kiansajjadi/charts/abiotic-factor
   ref:
     tag: 0.1.0
+  secretRef:
+    name: github_token
