@@ -29,5 +29,5 @@ spec:
       - name: ServerPassword
         valueFrom:
           secretKeyRef:
-            name: abiotic-factor-secret
-            key: server_password
+            name: abiotic-factor-server-secret
+            key: server-password
