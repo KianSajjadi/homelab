@@ -9,4 +9,4 @@ spec:
   ref:
     tag: 0.1.0
   secretRef:
-    name: github_token
+    name: abiotic-factor-oci-secret

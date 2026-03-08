@@ -10,5 +10,24 @@ spec:
     name: abiotic-factor
     namespace: abiotic-factor
   values:
-    imagePullSecret:
-      - name: github_token
+    imagePullSecret: abiotic-factor-secret
+    env:
+      - name: MaxServerPlayers
+        value: "6"
+      - name: Port
+        value: "7777"
+      - name: QueryPort
+        value: "27015"
+      - name: SteamServerName
+        value: "Kian Abiotic Factor Server"
+      - name: UsePerfThreads
+        value: "true"
+      - name: NoAsyncLoadingThread
+        value: "true"
+      - name: WorldSaveName
+        value: "Cascade"
+      - name: ServerPassword
+        valueFrom:
+          secretKeyRef:
+            name: abiotic-factor-secret
+            key: server_password

@@ -39,5 +39,6 @@ resources:
 
 preferredNode: homelab-node-0
 
-# list of secrets
 imagePullSecret: ""
+
+env: []
