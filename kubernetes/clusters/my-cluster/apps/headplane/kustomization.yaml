@@ -2,4 +2,4 @@ resources:
 - helmrepo.yaml
 - namespace.yaml
 - helmrelease.yaml
-- ingress.yaml
+- pvc.yaml
