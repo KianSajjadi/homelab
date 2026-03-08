@@ -10,6 +10,10 @@ spec:
     name: abiotic-factor
     namespace: abiotic-factor
   values:
+    image:
+      repository: ghcr.io/kiansajjadi/abiotic-factor
+      tag: latest
+      pullPolicy: Always
     imagePullSecret: abiotic-factor-secret
     env:
       - name: MaxServerPlayers

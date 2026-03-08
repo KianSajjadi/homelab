@@ -4,7 +4,7 @@ metadata:
   name: {{ include "abiotic-factor.fullname" . }}
   namespace: {{ include "abiotic-factor.fullname" . }}
 spec:
-  type: NodePort
+  type: {{ .Values.service.type }}
   externalTrafficPolicy: Local
   ports:
     - name: game
