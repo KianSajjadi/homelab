@@ -8,7 +8,7 @@ spec:
   chartRef:
     kind: OCIRepository
     name: abiotic-factor
-    namespace: flux-system
+    namespace: abiotic-factor
   values:
     imagePullSecret:
       - name: github_token
