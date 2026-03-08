@@ -12,3 +12,4 @@ resources:
 - longhorn-kustomization.yaml
 - printer-kustomization.yaml
 - media-kustomization.yaml
+- games-kustomization.yaml

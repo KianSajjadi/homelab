@@ -88,3 +88,4 @@ tank/data/scratch
 - Add hashicorp vault agent sidecar for dynamic DB credentials for spoolman/postgresdb
 - ~~Add paintman kubernetes config~~
 - Add local docker image registry
+- docker image automation

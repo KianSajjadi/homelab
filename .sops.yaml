@@ -47,3 +47,11 @@ creation_rules:
     key_groups:
       - age:
           - *kian_wsl
+
+  # ############################### game servers ############################### #
+  # abiotic-factor pat
+  - path_regex: ^kubernetes/.*/games/abiotic-factor/[^/]+\.ya?ml$
+    encrypted_regex: '^(data|stringData)$'
+    key_groups:
+      - age:
+          - *kian_wsl
