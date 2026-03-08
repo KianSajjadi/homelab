@@ -26,14 +26,18 @@ spec:
         fsGroup: {{ .Values.securityContext.fsGroup }}
         seccompProfile:
           type: {{ .Values.securityContext.seccompProfile.type }}
+      {{- if .Values.preferredNode }}
       affinity:
         nodeAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - key: kubernetes.io/hostname
-                operator: In
-                values:
-                  - {{ .Values.preferredNode }}
+            - weight: 100
+              preference:
+                matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - {{ .Values.preferredNode }}
+      {{- end }}
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
