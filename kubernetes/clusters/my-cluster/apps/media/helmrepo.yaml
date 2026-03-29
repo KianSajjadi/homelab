@@ -24,3 +24,13 @@ metadata:
 spec:
   interval: 1h
   url: https://brandan-schmitz.github.io/helm-charts/
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: jellyfin
+  namespace: media
+spec:
+  interval: 1h
+  url: https://jellyfin.github.io/jellyfin-helm
+---
