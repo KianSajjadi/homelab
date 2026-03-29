@@ -343,7 +343,8 @@ spec:
         mountPath: /media
       config:
         enabled: true
-        existingClaim: jellyfin-config-pvc
+        size: 2Gi
+        storageClass: longhorn
         mountPath: /config
     podSecurityContext:
       fsGroup: 100
