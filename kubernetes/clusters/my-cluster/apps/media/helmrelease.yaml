@@ -364,3 +364,4 @@ spec:
         - secretName: jellyfin-tls
           hosts:
             - jellyfin.syd.broc.ee
+    replicaCount: 1
