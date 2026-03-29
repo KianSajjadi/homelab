@@ -27,3 +27,5 @@ spec:
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         cert-manager.io/cluster-issuer: letsencrypt
+    persistence:
+      defaultClassReplicaCount: 2
