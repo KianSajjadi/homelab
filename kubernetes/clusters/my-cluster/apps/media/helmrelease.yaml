@@ -343,7 +343,7 @@ spec:
         mountPath: /media
       config:
         enabled: true
-        size: 2Gi
+        size: 5Gi
         storageClass: longhorn
         mountPath: /config
     podSecurityContext:
