@@ -348,21 +348,18 @@ spec:
     podSecurityContext:
       fsGroup: 100
       fsGroupChangePolicy: "OnRootMismatch"
-    annotations:
-      traefik.ingress.kubernetes.io/router.entrypoints: websecure
-      cert-manager.io/cluster-issuer: letsencrypt
-      tls:
-      - hosts:
-        - jellyfin.syd.broc.ee
-        secretName: jellyfin-tls
-      rules:
-      - host: jellyfin.syd.broc.ee
-        http:
+    ingress:
+      enabled: true
+      className: traefik
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        cert-manager.io/cluster-issuer: letsencrypt
+      hosts:
+        - host: jellyfin.syd.broc.ee
           paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: plex
-                port:
-                  number: 8096
+            - path: /
+              pathType: Prefix
+      tls:
+        - secretName: jellyfin-tls
+          hosts:
+            - jellyfin.syd.broc.ee
