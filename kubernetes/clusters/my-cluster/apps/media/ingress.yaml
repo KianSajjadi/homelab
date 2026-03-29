@@ -184,4 +184,4 @@ spec:
           service:
             name: plex
             port:
-              number: 8920
+              number: 8096
