@@ -158,30 +158,3 @@ spec:
             name: qbittorrent
             port:
               number: 8080
----
-# # Jellyfin
-# apiVersion: networking.k8s.io/v1
-# kind: Ingress
-# metadata:
-#   name: jellyfin-ingress
-#   namespace: media
-#   annotations:
-#     traefik.ingress.kubernetes.io/router.entrypoints: websecure
-#     cert-manager.io/cluster-issuer: letsencrypt
-# spec:
-#   ingressClassName: traefik
-#   tls:
-#   - hosts:
-#     - jellyfin.syd.broc.ee
-#     secretName: jellyfin-tls
-#   rules:
-#   - host: jellyfin.syd.broc.ee
-#     http:
-#       paths:
-#       - path: /
-#         pathType: Prefix
-#         backend:
-#           service:
-#             name: jellfyin
-#             port:
-#               number: 8096

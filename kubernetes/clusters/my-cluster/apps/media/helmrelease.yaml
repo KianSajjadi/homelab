@@ -34,7 +34,6 @@ spec:
         enabled: true
         existingClaim: radarr-config-pvc
         mountPath: /config
-
     podSecurityContext:
       fsGroup: 100
       fsGroupChangePolicy: "OnRootMismatch"
@@ -74,12 +73,11 @@ spec:
         enabled: true
         existingClaim: sonarr-config-pvc
         mountPath: /config
-
     podSecurityContext:
       fsGroup: 100
       fsGroupChangePolicy: "OnRootMismatch"
 ---
-#Plex
+# Plex
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
@@ -114,7 +112,6 @@ spec:
         enabled: true
         existingClaim: plex-config-pvc
         mountPath: /config
-
     podSecurityContext:
       fsGroup: 65534
       fsGroupChangePolicy: "OnRootMismatch"
@@ -142,8 +139,8 @@ spec:
             - matchExpressions:
                 - key: kubernetes.io/hostname
                   operator: In
-                  values: [mainboy]
-    # Longhorn permissions
+                  values:
+                    - mainboy
     podSecurityContext:
       fsGroup: 100
       fsGroupChangePolicy: "OnRootMismatch"
@@ -152,7 +149,6 @@ spec:
         enabled: true
         existingClaim: prowlarr-config-pvc
         mountPath: /config
-
 ---
 # qBittorrent
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
@@ -290,7 +286,8 @@ spec:
             - matchExpressions:
                 - key: kubernetes.io/hostname
                   operator: In
-                  values: [mainboy]
+                  values:
+                    - mainboy
     podSecurityContext:
       fsGroup: 1000
       fsGroupChangePolicy: "OnRootMismatch"
@@ -334,7 +331,7 @@ spec:
             - matchExpressions:
                 - key: kubernetes.io/hostname
                   operator: In
-                  values: 
+                  values:
                     - mainboy
     persistence:
       media:
@@ -366,28 +363,31 @@ spec:
             - jellyfin.syd.broc.ee
     replicaCount: 1
 ---
+# Tdarr
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: tdarr
   namespace: media
-  spec:
-    chart: tdarr
-    version: "4.5.3"
-    sourceRef:
-      kind: HelmRepository
-      name: k8s-home-lab
-      namespace: media
+spec:
+  chart:
+    spec:
+      chart: tdarr
+      version: "4.5.3"
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-home-lab
+        namespace: media
   values:
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
             - matchExpressions:
-              - key: kubernetes.io/hostname
-                operator: In
-                values:
-                  - mainboy
+                - key: kubernetes.io/hostname
+                  operator: In
+                  values:
+                    - mainboy
     persistence:
       media:
         enabled: true
@@ -395,13 +395,13 @@ metadata:
         mountPath: /media
       config:
         enabled: true
-        mountpath: /config
+        mountPath: /config
         storageClass: longhorn
         size: 5Gi
         accessMode: ReadWriteOnce
-      podSecurityContext:
-        fsGroup: 100
-        fsGroupChangePolicy: "OnRootMismatch"
+    podSecurityContext:
+      fsGroup: 100
+      fsGroupChangePolicy: "OnRootMismatch"
     ingress:
       enabled: true
       className: traefik
@@ -409,10 +409,10 @@ metadata:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         cert-manager.io/cluster-issuer: letsencrypt
       hosts:
-      - host: tdarr.syd.broc.ee
-        paths:
-          - path: /
-            pathType: Prefix
+        - host: tdarr.syd.broc.ee
+          paths:
+            - path: /
+              pathType: Prefix
       tls:
         - secretName: tdarr-tls
           hosts:
