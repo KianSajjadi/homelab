@@ -400,6 +400,12 @@ spec:
         storageClass: longhorn
         size: 5Gi
         accessMode: ReadWriteOnce
+      shared:
+        enabled: true
+        mountPath: /shared
+        storageClass: longhorn
+        size: 100Gi
+        accessMode: ReadWriteMany
     podSecurityContext:
       fsGroup: 100
       fsGroupChangePolicy: "OnRootMismatch"
