@@ -2,8 +2,8 @@
 set -e
 
 NODES=(
-  "homelab-node-0 root@192.168.0.64"
-  "homelab-node-1 root@192.168.0.3"
+  "homelab-node-0 root@192.168.0.218"
+  "homelab-node-1 root@192.168.0.59"
 )
 
 for NODE in "${NODES[@]}"; do

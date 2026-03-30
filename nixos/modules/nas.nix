@@ -13,11 +13,13 @@
     zfs
     lsof
     sysstat
+    ffmpeg
   ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.supportedFilesystems = [ "zfs" ];
+  nixpkgs.config.allowUnfree = true;
 
   boot.kernel.sysctl = {
     "net.ipv4.conf.all.rp_filter" = 2;

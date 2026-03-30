@@ -365,3 +365,55 @@ spec:
           hosts:
             - jellyfin.syd.broc.ee
     replicaCount: 1
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: tdarr
+  namespace: media
+  spec:
+    chart: tdarr
+    version: "4.5.3"
+    sourceRef:
+      kind: HelmRepository
+      name: k8s-home-lab
+      namespace: media
+  values:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                  - mainboy
+    persistence:
+      media:
+        enabled: true
+        existingClaim: media-nfs-pvc
+        mountPath: /media
+      config:
+        enabled: true
+        mountpath: /config
+        storageClass: longhorn
+        size: 5Gi
+        accessMode: ReadWriteOnce
+      podSecurityContext:
+        fsGroup: 100
+        fsGroupChangePolicy: "OnRootMismatch"
+      ingress:
+        enabled: true
+        className: traefik
+        annotations:
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          cert-manager.io/cluster-issuer: letsencrypt
+      hosts:
+        - host: tdarr.syd.broc.ee
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - secretName: tdarr-tls
+          hosts:
+            - tdarr.syd.broc.ee
