@@ -402,17 +402,17 @@ metadata:
       podSecurityContext:
         fsGroup: 100
         fsGroupChangePolicy: "OnRootMismatch"
-      ingress:
-        enabled: true
-        className: traefik
-        annotations:
-          traefik.ingress.kubernetes.io/router.entrypoints: websecure
-          cert-manager.io/cluster-issuer: letsencrypt
+    ingress:
+      enabled: true
+      className: traefik
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        cert-manager.io/cluster-issuer: letsencrypt
       hosts:
-        - host: tdarr.syd.broc.ee
-          paths:
-            - path: /
-              pathType: Prefix
+      - host: tdarr.syd.broc.ee
+        paths:
+          - path: /
+            pathType: Prefix
       tls:
         - secretName: tdarr-tls
           hosts:
