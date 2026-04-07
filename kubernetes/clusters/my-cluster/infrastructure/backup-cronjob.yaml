@@ -1,0 +1,58 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: k3s-backup
+  namespace: kube-system
+spec:
+  schedule: "0 2 * * *"  # Daily at 2 AM
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          hostNetwork: true
+          hostPID: true
+          restartPolicy: OnFailure
+          nodeSelector:
+            node-role.kubernetes.io/control-plane: "true"
+          tolerations:
+          - key: node-role.kubernetes.io/control-plane
+            operator: Exists
+            effect: NoSchedule
+          containers:
+          - name: backup
+            image: alpine:latest
+            command:
+            - /bin/sh
+            - -c
+            - |
+              set -e
+              BACKUP_DIR="/nfs-backup/k3s"
+              mkdir -p "$BACKUP_DIR"
+              
+              # Create backup with timestamp
+              TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+              cp /host/var/lib/rancher/k3s/server/db/state.db "$BACKUP_DIR/state.db.$TIMESTAMP"
+              
+              # Keep only last 3 backups
+              cd "$BACKUP_DIR"
+              ls -t state.db.* | tail -n +4 | xargs -r rm
+              
+              echo "Backup completed: state.db.$TIMESTAMP"
+              echo "Remaining backups:"
+              ls -lh state.db.*
+            volumeMounts:
+            - name: host-root
+              mountPath: /host
+            - name: nfs-backup
+              mountPath: /nfs-backup
+          volumes:
+          - name: host-root
+            hostPath:
+              path: /
+              type: Directory
+          - name: nfs-backup
+            nfs:
+              server: 192.168.0.59
+              path: /tank/backups/k3s
