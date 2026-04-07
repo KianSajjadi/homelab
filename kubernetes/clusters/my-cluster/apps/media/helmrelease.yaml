@@ -228,6 +228,12 @@ spec:
                       value: "8080"
                     - name: FIREWALL_OUTBOUND_SUBNETS
                       value: "10.42.0.0/16,10.43.0.0/16,192.168.0.0/16"
+                    - name: DOT
+                      value: "off"
+                    - name: DNS_ADDRESS
+                      value: "1.1.1.1"
+                    - name: HEALTH_VPN_DURATION_INITIAL
+                      value: "60s"
                     - name: VPN_PORT_FORWARDING
                       value: "on"
                     - name: PORT_FORWARD_ONLY
