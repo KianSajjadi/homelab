@@ -7,3 +7,5 @@ resources:
   - svc.yaml
   - overseerr.yaml
   - ocirepo.yaml
+  - protonvpn-credentials-secret.yaml
+  - protonvpn-wg-secret.yaml
