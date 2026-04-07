@@ -30,5 +30,5 @@ spec:
     persistence:
       defaultClassReplicaCount: 2
     defaultSettings:
-      backupTarget: nfs://192.168.0.59:/tank/media/backups/longhorn
+      backupTarget: nfs://192.168.0.59:/tank/backups/longhorn
       backupTargetCredentialSecret: ""
