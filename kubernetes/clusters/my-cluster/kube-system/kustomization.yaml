@@ -1,2 +1,3 @@
 resources:
   - coredns.yaml
+  - backup-cronjob.yaml
