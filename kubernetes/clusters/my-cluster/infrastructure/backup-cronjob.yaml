@@ -55,4 +55,4 @@ spec:
           - name: nfs-backup
             nfs:
               server: 192.168.0.59
-              path: /tank/backups/k3s
+              path: /tank/backups
