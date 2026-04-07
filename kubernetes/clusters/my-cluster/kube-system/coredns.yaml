@@ -1,1 +1,10 @@
-# Old ca-lan service removed - now using cert-manager for TLS certificates
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: coredns-custom
+  namespace: kube-system
+data:
+  custom.server: |
+    syd.adguard.lan lan:53 {
+      forward . 192.168.0.251
+    }
