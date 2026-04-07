@@ -13,3 +13,4 @@ resources:
 - printer-kustomization.yaml
 - media-kustomization.yaml
 - games-kustomization.yaml
+- networking-kustomization.yaml

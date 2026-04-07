@@ -1,0 +1,12 @@
+{
+  "pvcs": [
+    {
+      "pvc": "pvc-dcb61c9a-71f5-4ae3-b772-9aee8987d36f-800c46cd#",
+      "service": "plex" - heavily corrupted
+    },
+    {
+      "pvc": "pvc-6211ed05-3b2e-4cc9-8017-3a4dc5d3fa77-30c4ab33#",
+      "service": "qbittorrent"
+    } 
+  ]
+}
