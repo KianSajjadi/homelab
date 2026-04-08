@@ -197,6 +197,7 @@
 
     exports = ''
       /tank/media  *(rw,sync,no_subtree_check,no_root_squash)
+      /tank/backups  *(rw,sync,no_subtree_check,no_root_squash)
     '';
   };
 
