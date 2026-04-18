@@ -1,4 +1,3 @@
 resources:
   - coredns.yaml
   - backup-cronjob.yaml
-  - nvidia-device-plugin.yaml

@@ -340,9 +340,9 @@ spec:
                   values:
                     - mainboy
     runtimeClassName: nvidia
-    resources:
-      limits:
-        nvidia.com/gpu: 1
+    env:
+      NVIDIA_VISIBLE_DEVICES: all
+      NVIDIA_DRIVER_CAPABILITIES: all
     persistence:
       media:
         enabled: true

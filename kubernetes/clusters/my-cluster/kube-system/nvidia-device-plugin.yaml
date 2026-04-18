@@ -30,13 +30,21 @@ spec:
           - name: PASS_DEVICE_SPECS
             value: "true"
         securityContext:
-          allowPrivilegeEscalation: false
-          capabilities:
-            drop: ["ALL"]
+          privileged: true
         volumeMounts:
         - name: device-plugin
           mountPath: /var/lib/kubelet/device-plugins
+        - name: dev
+          mountPath: /dev
+        - name: nvidia-driver
+          mountPath: /usr/local/nvidia
       volumes:
       - name: device-plugin
         hostPath:
           path: /var/lib/kubelet/device-plugins
+      - name: dev
+        hostPath:
+          path: /dev
+      - name: nvidia-driver
+        hostPath:
+          path: /usr/lib/x86_64-linux-gnu
