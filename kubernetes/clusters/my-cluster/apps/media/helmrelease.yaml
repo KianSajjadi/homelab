@@ -339,6 +339,10 @@ spec:
                   operator: In
                   values:
                     - mainboy
+    runtimeClassName: nvidia
+    resources:
+      limits:
+        nvidia.com/gpu: 1
     persistence:
       media:
         enabled: true
