@@ -31,3 +31,4 @@ spec:
       config:
         enabled: true
         existingClaim: seerr-config-pvc
+    service.port: 5055
