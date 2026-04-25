@@ -5,7 +5,7 @@ resources:
   - helmrepo.yaml
   - volumes.yaml
   - svc.yaml
-  - overseerr.yaml
+  - seerr.yaml
   - ocirepo.yaml
   - protonvpn-credentials-secret.yaml
   - protonvpn-wg-secret.yaml

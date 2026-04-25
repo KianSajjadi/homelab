@@ -94,7 +94,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: overseerr-config-pvc
+  name: seerr-config-pvc
   namespace: media
 spec:
   accessModes:

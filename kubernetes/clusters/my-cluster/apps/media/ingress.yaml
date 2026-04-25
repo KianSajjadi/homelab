@@ -105,11 +105,11 @@ spec:
             port:
               number: 32400
 ---
-# Overseerr
+# Seerr
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: overseerr-ingress
+  name: seerr-ingress
   namespace: media
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
@@ -118,17 +118,17 @@ spec:
   ingressClassName: traefik
   tls:
   - hosts:
-    - overseerr.syd.broc.ee
-    secretName: overseerr-tls
+    - seerr.syd.broc.ee
+    secretName: seerr-tls
   rules:
-  - host: overseerr.syd.broc.ee
+  - host: seerr.syd.broc.ee
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: overseerr
+            name: seerr
             port:
               number: 5055
 ---

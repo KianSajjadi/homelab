@@ -14,6 +14,7 @@
     lsof
     sysstat
     ffmpeg
+    unrar
   ];
 
   boot.loader.systemd-boot.enable = true;
